@@ -1,5 +1,11 @@
 <template>
-  <h1>creating notes</h1>
+  <div class="create">
+    <div class="create__header">
+      <router-link>
+        <h3>Folders</h3>
+      </router-link>
+    </div>
+  </div>
 </template>
 
 <script>
