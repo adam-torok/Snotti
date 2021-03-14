@@ -1,7 +1,5 @@
 <template>
-  <div>
-    <router-view></router-view>
-  </div>
+  <h1>showing note</h1>
 </template>
 
 <script>
