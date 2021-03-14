@@ -3,7 +3,6 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import { routes } from './routes';
 import MainApp from './Main'
-
 Vue.use(VueRouter);
 
 const router = new VueRouter({

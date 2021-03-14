@@ -27,6 +27,8 @@
         "vue-template-compiler": "^2.6.10"
     },
     "dependencies": {
+        "tiptap": "^1.32.1",
+        "tiptap-extensions": "^1.35.1",
         "vue-router": "^3.5.1"
     }
 }

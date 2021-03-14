@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col">
+  <div class="flex flex-col bg-gray-200">
     <div class="flex justify-between p-4">
       <router-link class="icon flex justify-center items-center" to="/folders"><i class="icon fa-lg fas fa-chevron-left mr-1"></i> Back</router-link>
       <router-link class="icon" to="/notes"><i class="icon fa-lg fas fa-ellipsis-h"></i></router-link>
@@ -26,6 +26,7 @@
         </div>
       </div>
     </div>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" class="fill-current bg-gray-200 text-white  md:block"><path fill-opacity="1" d="M0,64L120,85.3C240,107,480,149,720,149.3C960,149,1200,107,1320,85.3L1440,64L1440,320L1320,320C1200,320,960,320,720,320C480,320,240,320,120,320L0,320Z"></path></svg>
     <div class="notes__footer">
       <span><small>2 Notes</small></span>
       <router-link to="/note/create"><i class="icon fa-lg far fa-edit"></i></router-link>
@@ -54,9 +55,9 @@ export default {
 
     &projects{
       background: white;
-      padding: 0px 10px;
+      padding: 0px 0;
       border-radius: 10px;
-      
+
       & .single{
         display: grid;
         grid-template-columns: 90% 10%;

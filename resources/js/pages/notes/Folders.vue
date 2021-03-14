@@ -1,7 +1,7 @@
 <template>
-  <div class="flex flex-col">
+  <div class="flex flex-col bg-gray-200">
     <div class="flex justify-end p-2">
-      <router-link class="icon" to="/notes">Edit</router-link>
+      <router-link class="icon m-2" to="/notes">Edit</router-link>
     </div>
     <div class="notes">
       <div class="notes__header">
@@ -21,6 +21,7 @@
         </router-link>
       </div>
     </div>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" class="fill-current bg-gray-200 text-white  md:block"><path fill-opacity="1" d="M0,64L120,85.3C240,107,480,149,720,149.3C960,149,1200,107,1320,85.3L1440,64L1440,320L1320,320C1200,320,960,320,720,320C480,320,240,320,120,320L0,320Z"></path></svg>
     <div class="notes__footer">
       <router-link to="/note/create"><i class="icon fa-lg fas fa-folder-plus"></i></router-link>
       <router-link to="/note/create"><i class="icon fa-lg far fa-edit"></i></router-link>
@@ -37,7 +38,7 @@ export default {
 <style lang="scss">
 
   .notes{
-    margin: 0px 60px;
+    margin: 0px 300px;
   }
 
   .notes__{
@@ -64,7 +65,7 @@ export default {
     &search>input{
       width:100%;
       padding: 5px;
-      background: #E0DEE8;
+      background: white;
       border-radius: 10px;
       outline: none!important;
     }
@@ -75,7 +76,6 @@ export default {
 
     &projects{
       background: white;
-      padding: 0px 10px;
       border-radius: 10px;
       
       & .single{
@@ -114,7 +114,7 @@ export default {
     }
   }
   .icon{
-    color: #FFD100;
+    color: gray;
   }
  
 </style>

@@ -1,13 +1,14 @@
 <template>
-  <h1>showing note</h1>
+  <div>
+      <Editor/>
+  </div>
 </template>
 
 <script>
+import Editor from '../../components/Editor'
 export default {
-
+  components:{
+    Editor
+  }
 }
 </script>
-
-<style>
-
-</style>

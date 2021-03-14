@@ -1,14 +1,16 @@
 <template>
   <div>
-    <transition name='fade' mode="out-in" >
+    <Navbar/>
       <router-view></router-view>
-    </transition>   
   </div>
 </template>
 
 <script>
+import Navbar from './components/Navbar'
 export default {
-
+  components:{
+    Navbar
+  }
 }
 </script>
 
