@@ -88,7 +88,7 @@ export default {
          this.isLoading = true;
          this.loginText = "Logging in";
          setTimeout(() => {
-            this.$store.dispatch('user/login',this.$data.form)
+            this.$store.dispatch('user/login', this.$data.form)
                .then((res) => {
                   this.$store.commit("user/LOGIN_SUCCESS", res);
                   this.$router.push({ path: "/folders" });
