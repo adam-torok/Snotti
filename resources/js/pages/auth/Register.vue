@@ -1,5 +1,5 @@
 <template>
-<div class="auth__screen flex items-center p-4 bg-gray-100 lg:justify-center">
+<div class="auth__screen flex items-center p-4 bg-gray-200 lg:justify-center">
       <div
         class="flex flex-col overflow-hidden bg-white rounded-md shadow-lg max md:flex-row md:flex-1 lg:max-w-screen-md"
       >

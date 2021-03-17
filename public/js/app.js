@@ -2596,6 +2596,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({});
 
 /***/ }),
@@ -3216,7 +3217,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#app{\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n}\nbody{\n  -webkit-user-select:none;-moz-user-select:-moz-none;\n  -ms-user-select:none;user-select:none;\n  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);\n}\n*:focus {\n  outline: none;\n}\n.fade-enter-active, .fade-leave-active {\n  width: inherit;\n  transition: opacity .2s;\n}\n.fade-enter, .fade-leave-to {\n  opacity: 0;\n}\n@media only screen and (max-width: 600px) {\n.notes{\n    margin: 0 20px!important;\n}\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n#app{\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n}\nbody{\n  -webkit-user-select:none;-moz-user-select:-moz-none;\n  -ms-user-select:none;user-select:none;\n  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);\n}\n*:focus {\n  outline: none;\n}\n.fade-enter-active, .fade-leave-active {\n  width: inherit;\n  transition: opacity 0.2s;\n}\n.fade-enter, .fade-leave-to {\n  opacity: 0;\n}\n@media only screen and (max-width: 600px) {\n.notes{\n    margin: 0 20px!important;\n}\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -57858,7 +57859,7 @@ var render = function() {
     "div",
     {
       staticClass:
-        "auth__screen flex items-center  p-4 bg-gray-100 lg:justify-center"
+        "auth__screen flex items-center  p-4 bg-gray-200 lg:justify-center"
     },
     [
       _c(
@@ -58141,7 +58142,7 @@ var render = function() {
     "div",
     {
       staticClass:
-        "auth__screen flex items-center p-4 bg-gray-100 lg:justify-center"
+        "auth__screen flex items-center p-4 bg-gray-200 lg:justify-center"
     },
     [
       _c(
@@ -58502,26 +58503,40 @@ var staticRenderFns = [
             "h1",
             {
               staticClass:
-                "font-bold text-gray-700 text-xl sm:text-2xl md:text-5xl leading-tight mb-6"
+                "animate__animated animate__fadeInDown font-bold text-gray-700 text-xl sm:text-2xl md:text-5xl leading-tight mb-6"
             },
             [_vm._v("About the project")]
           ),
           _vm._v(" "),
           _c("p", { staticClass: "text-gray-600 md:text-xl md:px-18" }, [
-            _c("strong", [
-              _vm._v(
-                "I do not own any right in the apple logo, or used resources."
-              )
-            ])
+            _c(
+              "strong",
+              {
+                staticClass: "animate__animated animate__fadeInDown ",
+                staticStyle: { display: "inline-block" }
+              },
+              [
+                _vm._v(
+                  "I do not own any right in the apple logo, or used resources."
+                )
+              ]
+            )
           ]),
           _vm._v(" "),
           _c("br"),
           _vm._v(" "),
-          _c("p", { staticClass: "text-gray-600 md:text-xl md:px-18" }, [
-            _vm._v(
-              "Twee vaporware irony tote bag iPhone fixie typewriter squid. Direct trade scenester wayfarers art party brooklyn, woke activated charcoal PBR&B raclette. Actually crucifix forage food truck subway tile hexagon, kogi cloud bread activated charcoal williamsburg viral DIY aesthetic. Marfa etsy ugh offal deep v whatever vegan four loko chambray direct trade."
-            )
-          ]),
+          _c(
+            "p",
+            {
+              staticClass:
+                "animate__animated animate__fadeInDown animate__faster text-gray-600 md:text-xl md:px-18"
+            },
+            [
+              _vm._v(
+                "Twee vaporware irony tote bag iPhone fixie typewriter squid. Direct trade scenester wayfarers art party brooklyn, woke activated charcoal PBR&B raclette. Actually crucifix forage food truck subway tile hexagon, kogi cloud bread activated charcoal williamsburg viral DIY aesthetic. Marfa etsy ugh offal deep v whatever vegan four loko chambray direct trade."
+              )
+            ]
+          ),
           _vm._v(" "),
           _c("div", {
             staticClass:
@@ -58638,7 +58653,7 @@ var staticRenderFns = [
             "h1",
             {
               staticClass:
-                "font-bold text-gray-700 text-xl sm:text-2xl md:text-5xl leading-tight mb-6"
+                "animate__animated animate__fadeInDown font-bold text-gray-700 text-xl sm:text-2xl md:text-5xl leading-tight mb-6"
             },
             [_vm._v("How Snotti works")]
           ),
@@ -58676,9 +58691,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", [
-      _c("img", { attrs: { src: "images/mockup.png", alt: "" } })
-    ])
+    return _c("div", [_c("img", { attrs: { src: "images/mockup.png" } })])
   },
   function() {
     var _vm = this
@@ -58765,7 +58778,7 @@ var render = function() {
               "h1",
               {
                 staticClass:
-                  "font-bold text-gray-700 text-xl sm:text-2xl md:text-5xl leading-tight mb-6"
+                  "md:max-w-2xl font-bold text-gray-700 text-xl sm:text-2xl md:text-5xl leading-tight mb-6 "
               },
               [
                 _vm._v(
@@ -58780,9 +58793,12 @@ var render = function() {
               )
             ]),
             _vm._v(" "),
+            _c("br"),
+            _vm._v(" "),
             _c(
               "video",
               {
+                staticClass: "mt-5",
                 attrs: {
                   width: "70%",
                   height: "240",
@@ -58819,7 +58835,7 @@ var staticRenderFns = [
             "h1",
             {
               staticClass:
-                "animate__animated animate__fadeIn  font-bold text-gray-700 text-xl sm:text-2xl md:text-5xl leading-tight mb-6"
+                "animate__animated animate__fadeInDown font-bold text-gray-700 text-xl sm:text-2xl md:text-5xl leading-tight mb-6"
             },
             [
               _vm._v(
@@ -58848,12 +58864,12 @@ var staticRenderFns = [
           _vm._v(" "),
           _c("div", {
             staticClass:
-              "hidden sm:hidden md:block h-40 w-40 rounded-full grayish absolute right-0 bottom-0 -mb-64 -mr-48"
+              "animate__animated animate__fadeInDown hidden sm:hidden md:block h-40 w-40 rounded-full grayish absolute right-0 bottom-0 -mb-64 -mr-48"
           }),
           _vm._v(" "),
           _c("div", {
             staticClass:
-              "hidden sm:hidden md:block h-5 w-5 rounded-full grayish absolute top-0 right-0 -mr-40 mt-32"
+              "animate__animated animate__fadeInDown hidden sm:hidden md:block h-5 w-5 rounded-full grayish absolute top-0 right-0 -mr-40 mt-32"
           })
         ]
       )

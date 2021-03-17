@@ -1,5 +1,5 @@
 <template>
-<div class="auth__screen flex items-center  p-4 bg-gray-100 lg:justify-center">
+<div class="auth__screen flex items-center  p-4 bg-gray-200 lg:justify-center">
       <div class="flex flex-col overflow-hidden bg-white rounded-md shadow-lg max md:flex-row md:flex-1 lg:max-w-screen-md">
         <div class="p-4 py-6 text-white bg-gray-500 md:w-80 md:flex-shrink-0 md:flex md:flex-col md:items-center md:justify-evenly">
           <div class="font-bold text-center text-white text-xl sm:text-2xl md:text-5xl leading-tight mb-6">
@@ -66,7 +66,7 @@
           </form>
         </div>
       </div>
-    </div>
+</div>
 </template>
 
 <script>
