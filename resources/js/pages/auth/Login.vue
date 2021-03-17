@@ -1,5 +1,5 @@
 <template>
-<div class="flex items-center min-h-screen p-4 bg-gray-100 lg:justify-center">
+<div class="auth__screen flex items-center  p-4 bg-gray-100 lg:justify-center">
       <div
         class="flex flex-col overflow-hidden bg-white rounded-md shadow-lg max md:flex-row md:flex-1 lg:max-w-screen-md"
       >
@@ -7,7 +7,7 @@
           class="p-4 py-6 text-white bg-gray-500 md:w-80 md:flex-shrink-0 md:flex md:flex-col md:items-center md:justify-evenly"
         >
           <div class="font-bold text-center text-white text-xl sm:text-2xl md:text-5xl leading-tight mb-6">
-            <a href="#">Snotti</a>
+            <a href="#">Snotti.</a>
           </div>
           <p class="mt-6 font-normal text-center text-gray-300 md:mt-0">
             With the power of Snotti, you can now take notes like never before! <br> (actually, it's a lie).

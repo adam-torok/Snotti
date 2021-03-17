@@ -6,11 +6,17 @@
       <div class="relative w-full md:max-w-2xl md:mx-auto text-center">
         <h1 class="font-bold text-gray-700 text-xl sm:text-2xl md:text-5xl leading-tight mb-6">How Snotti works</h1>
         <p class="text-gray-600 md:text-xl md:px-18">
-          I do not own any right in the apple logo, or used resources.
+          <strong>I do not own any right in the apple logo, or used resources.</strong>
         </p>
-        <div class=" md:block h-40 w-40 rounded-full blueish absolute right-0 bottom-0 -mb-64 -mr-48"></div>
-        <div class=" md:block h-5 w-5 rounded-full blueish absolute top-0 right-0 -mr-40 mt-32"></div>
+        <br>
+        <p class="text-gray-600 md:text-xl md:px-18">Meggings slow-carb celiac heirloom +1 kale chips. Pour-over stumptown copper mug schlitz typewriter pok pok, viral photo booth marfa brooklyn cornhole vice taxidermy yr. Vice tofu tattooed helvetica cloud bread polaroid mlkshk intelligentsia edison bulb gentrify heirloom. Hot chicken photo booth listicle chia.</p>
+        <div class="hidden sm:hidden md:block h-40 w-40 rounded-full blueish absolute right-0 bottom-0 -mb-64 -mr-48"></div>
+        <div class="hidden sm:hidden md:block h-5 w-5 rounded-full blueish absolute top-0 right-0 -mr-40 mt-32"></div>
       </div>
+    </div>
+
+    <div>
+      <img src="images/mockup.png" alt="">
     </div>
 
     <svg

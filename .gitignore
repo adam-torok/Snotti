@@ -17,3 +17,4 @@ yarn-error.log
 *.js
 public/css/app.css
 public/css/app.css
+public/js/app.js
