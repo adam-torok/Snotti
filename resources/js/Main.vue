@@ -1,7 +1,7 @@
 <template>
   <div>
     <Navbar/>
-      <router-view></router-view>
+    <router-view></router-view>
   </div>
 </template>
 
@@ -30,7 +30,7 @@ export default {
   }
   .fade-enter-active, .fade-leave-active {
     width: inherit;
-    transition: opacity .2s;
+    transition: opacity 0.2s;
   }
 
   .fade-enter, .fade-leave-to {
