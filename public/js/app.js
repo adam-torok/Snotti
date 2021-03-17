@@ -2501,6 +2501,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({});
 
 /***/ }),
@@ -3097,7 +3105,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.grayish{\n  background: #c1c1c1;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.grayish{\n  background: #D9DEE6;\n}\n.video__container{\n  background: white;\n  width: 100%;\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  align-items: center;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -58357,7 +58365,46 @@ var render = function() {
                 }
               })
             ]
-          )
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "video__container" }, [
+            _c(
+              "h1",
+              {
+                staticClass:
+                  "font-bold text-gray-700 text-xl sm:text-2xl md:text-5xl leading-tight mb-6"
+              },
+              [
+                _vm._v(
+                  "Snotti - a simple note taking app inspired by Apple Notes"
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c("p", { staticClass: "text-gray-600 md:text-xl md:px-18" }, [
+              _vm._v(
+                "\n          I do not own any right in the apple logo, or used resources.\n        "
+              )
+            ]),
+            _vm._v(" "),
+            _c(
+              "video",
+              {
+                attrs: {
+                  width: "70%",
+                  height: "240",
+                  autoplay: "true",
+                  muted: ""
+                },
+                domProps: { muted: true }
+              },
+              [
+                _c("source", {
+                  attrs: { src: "videos/out-white.mp4", type: "video/mp4" }
+                })
+              ]
+            )
+          ])
         ]),
         _vm._v(" "),
         _vm._m(1)
@@ -58402,11 +58449,9 @@ var staticRenderFns = [
           _vm._v(" "),
           _c("p", { staticClass: "text-gray-600 md:text-xl md:px-18" }, [
             _vm._v(
-              "Twee vaporware irony tote bag iPhone fixie typewriter squid. Direct trade scenester wayfarers art party brooklyn, woke activated charcoal PBR&B raclette. Actually crucifix forage food truck subway tile hexagon, kogi cloud bread activated charcoal williamsburg viral DIY aesthetic. Marfa etsy ugh offal deep v whatever vegan four loko chambray direct trade."
+              "Twee vaporware irony tote bag iPhone fixie typewriter squid. Direct trade scenester wayfarers art party brooklyn, woke activated charcoal PBR&B raclette. Actually crucifix forage food truck subway tile hexagon, kogi cloud bread activated charcoal williamsburg viral DIY aesthetic. Marfa"
             )
           ]),
-          _vm._v(" "),
-          _c("div"),
           _vm._v(" "),
           _c("div", {
             staticClass:
