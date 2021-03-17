@@ -1,11 +1,16 @@
 <template>
-	<div class="icon" :class="[`icon--${name}`, `icon--${size}`, { 'has-align-fix': fixAlign }]">
-		<img />
-	</div>
+  <div class="icon" :class="[`icon--${name}`, `icon--${size}`, { 'has-align-fix': fixAlign }]">
+    <svg class="icon__svg">
+      <use xmlns:xlink="http://www.w3.org/1999/xlink" :xlink:href="'#icon--' + name"></use>
+    </svg>
+  </div>
 </template>
 
 <script>
 export default {
+	mounted(){
+		console.log(this.name);
+	},
 	props: {
 		name: {},
 		size: {

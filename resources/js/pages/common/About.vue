@@ -6,10 +6,12 @@
       <div class="relative w-full md:max-w-2xl md:mx-auto text-center">
         <h1 class="font-bold text-gray-700 text-xl sm:text-2xl md:text-5xl leading-tight mb-6">About the project</h1>
         <p class="text-gray-600 md:text-xl md:px-18">
-          I do not own any right in the apple logo, or used resources.
+        <strong>I do not own any right in the apple logo, or used resources.</strong>
         </p>
-        <div class=" md:block h-40 w-40 rounded-full grayish absolute right-0 bottom-0 -mb-64 -mr-48"></div>
-        <div class=" md:block h-5 w-5 rounded-full grayish absolute top-0 right-0 -mr-40 mt-32"></div>
+        <br>
+        <p class="text-gray-600 md:text-xl md:px-18">Twee vaporware irony tote bag iPhone fixie typewriter squid. Direct trade scenester wayfarers art party brooklyn, woke activated charcoal PBR&B raclette. Actually crucifix forage food truck subway tile hexagon, kogi cloud bread activated charcoal williamsburg viral DIY aesthetic. Marfa etsy ugh offal deep v whatever vegan four loko chambray direct trade.</p> 
+        <div class="hidden sm:hidden md:block h-40 w-40 rounded-full grayish absolute right-0 bottom-0 -mb-64 -mr-48"></div>
+        <div class="hidden sm:hidden md:block h-5 w-5 rounded-full grayish absolute top-0 right-0 -mr-40 mt-32"></div>
       </div>
     </div>
 

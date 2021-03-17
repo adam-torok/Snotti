@@ -1,26 +1,26 @@
 <template>
   <div class="bg-gray-200 px-4 py-4">
     <div class="w-full md:max-w-6xl md:mx-auto md:flex md:items-center md:justify-between">
-      <div>
+      <div class="flex justify-center">
         <router-link to="/" class="inline-block py-2 text-gray-800 text-2xl font-bold"><i class="fab fa-apple"></i> Snotti. </router-link>
       </div>
       
       <div>
-        <div class=" md:block">
-          <router-link to="/details" class="inline-block py-1 md:py-4 text-gray-600 mr-6 font-bold">How it Works</router-link>
-          <router-link to="/about" class="inline-block py-1 md:py-4 text-gray-500 hover:text-gray-600 mr-6">About the project</router-link>
+        <div class="">
+          <router-link to="/details" class="flex justify-center md:inline-block py-1 md:py-4 text-gray-600 mr-6 font-bold">How it Works</router-link>
+          <router-link to="/about" class="flex justify-center md:inline-block py-1 md:py-4 text-gray-500 hover:text-gray-600 mr-6">About the project</router-link>
         </div>
       </div>
 
         <div>
-        <div class=" md:block">
-          <router-link to="/folders" class="inline-block py-1 md:py-4 text-gray-600 mr-6 font-bold">Folders</router-link>
+        <div class="hidden">
+          <router-link to="/folders" class="inline-block py-1 md:py-4 text-gray-600 mr-6 font-bold"><i class="fas fa-lg fa-folder-open"></i></router-link>
         </div>
       </div>
 
-      <div class=" md:block">
-        <router-link to="/login" class="inline-block py-1 md:py-4 text-gray-500 hover:text-gray-600 mr-6">Login</router-link>
-        <router-link to="/register" class="inline-block py-2 px-4 text-gray-700 bg-white hover:bg-gray-100 rounded-lg">Register for free</router-link>
+      <div class="">
+        <router-link to="/login" class="flex justify-center md:inline-block py-1 md:py-4 text-gray-500 hover:text-gray-600 mr-6">Login</router-link>
+        <router-link to="/register" class="flex justify-center md:inline-block py-2 px-4 text-gray-700 bg-white hover:bg-gray-100 rounded-lg">Register for free</router-link>
       </div>
     </div>
   </div>
@@ -32,7 +32,6 @@
         name: 'app-header',
         methods: {
 
-            
             changeMode(){
                 let htmlClasses = document.querySelector('html').classList;
                 if(localStorage.theme == 'dark') {
@@ -48,13 +47,7 @@
             return{
                 menuOpen :false,
             }
-        },
-        created: function() {
-            document.addEventListener('click', this.documentClick)
-        },
-        destroyed(){
-            document.removeEventListener('click', this.documentClick)
-        }
+      },
 }
 </script>
 
