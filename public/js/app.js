@@ -2129,6 +2129,11 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   methods: {
+    logout: function logout() {
+      console.log(this.$store);
+      this.$store.dispatch('user/logout');
+      this.$router.push('/login');
+    },
     changeMode: function changeMode() {
       var htmlClasses = document.querySelector('html').classList;
 
@@ -3063,10 +3068,12 @@ var actions = {
         setAuthorization(response.data.access_token);
         res(response.data);
       })["catch"](function (err) {
-        console.log(err);
         rej("Wrong email or password");
       });
     });
+  },
+  logout: function logout(content) {
+    content.commit("LOGOUT");
   }
 };
 var mutations = {
@@ -3232,7 +3239,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.naver[data-v-6dde423b]{\n    z-index: 9;\n}\n.dropdown-menu[data-v-6dde423b]{\n        background: white;\n        position: absolute;\n        width: 200px;\n        right: 0;\n        top: 3rem;\n        justify-content: center;\n        align-items: center;\n        transform-origin: top;\n        transition: all .2s ease-in-out;\n}\n.dropdpown__inner[data-v-6dde423b]{\n        display: flex;\n        align-content: center;\n        align-items: center;\n        transition: all .2s ease-in-out;\n        justify-content: center;\n        flex-direction: column;\n        padding:10px;\n}\n.slide-enter[data-v-6dde423b], .slide-leave-to[data-v-6dde423b]{\n        transform: scaleY(0);\n}\n.rotated[data-v-6dde423b]{\n        transform: rotate(180deg)!important;\n        transition: all .2s ease-in-out;\n}\n.fa-chevron-circle-down[data-v-6dde423b]{\n        transform: rotate(0deg);\n        transition: all .2s ease-in-out;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.naver[data-v-6dde423b]{\n    z-index: 9;\n}\n.dropdown-menu[data-v-6dde423b]{\n        background: white;\n        position: absolute;\n        width: 200px;\n        right: 0;\n        top: 3rem;\n        justify-content: center;\n        align-items: center;\n        transform-origin: top;\n        transition: all .2s ease-in-out;\n}\n.dropdpown__inner[data-v-6dde423b]{\n        display: flex;\n        align-content: center;\n        align-items: center;\n        transition: all .2s ease-in-out;\n        justify-content: center;\n        flex-direction: column;\n        padding:10px;\n}\n.slide-enter[data-v-6dde423b], .slide-leave-to[data-v-6dde423b]{\n        transform: scaleY(0);\n}\n.rotated[data-v-6dde423b]{\n        transform: rotate(180deg)!important;\n        transition: all .2s ease-in-out;\n}\n.fa-chevron-circle-down[data-v-6dde423b]{\n        transform: rotate(0deg);\n        transition: all .2s ease-in-out;\n}\n.router-link-active[data-v-6dde423b]{\n      font-weight: bold;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -57737,7 +57744,7 @@ var render = function() {
                 "router-link",
                 {
                   staticClass:
-                    "flex justify-center md:inline-block py-1 md:py-4 text-gray-600 mr-6 font-bold",
+                    "flex justify-center md:inline-block py-1 md:py-4 text-gray-600 mr-6",
                   attrs: { to: "/details" }
                 },
                 [_vm._v("How it Works")]
@@ -57806,21 +57813,17 @@ var render = function() {
           : _vm._e(),
         _vm._v(" "),
         _vm.currentUser
-          ? _c(
-              "div",
-              [
-                _c(
-                  "router-link",
-                  {
-                    staticClass:
-                      "flex justify-center md:inline-block py-1 md:py-4 text-gray-500 hover:text-gray-600 mr-6",
-                    attrs: { to: "/logout" }
-                  },
-                  [_vm._v("Logout")]
-                )
-              ],
-              1
-            )
+          ? _c("div", [
+              _c(
+                "button",
+                {
+                  staticClass:
+                    "flex justify-center md:inline-block py-1 md:py-4 text-gray-500 hover:text-gray-600 mr-6",
+                  on: { click: _vm.logout }
+                },
+                [_vm._v("Logout")]
+              )
+            ])
           : _vm._e()
       ]
     )

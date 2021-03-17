@@ -7,7 +7,7 @@
       
       <div>
         <div>
-          <router-link to="/details" class="flex justify-center md:inline-block py-1 md:py-4 text-gray-600 mr-6 font-bold">How it Works</router-link>
+          <router-link to="/details" class="flex justify-center md:inline-block py-1 md:py-4 text-gray-600 mr-6">How it Works</router-link>
           <router-link to="/about" class="flex justify-center md:inline-block py-1 md:py-4 text-gray-500 hover:text-gray-600 mr-6">About the project</router-link>
         </div>
       </div>
@@ -24,7 +24,7 @@
       </div>
 
        <div v-if="currentUser">
-        <router-link to="/logout" class="flex justify-center md:inline-block py-1 md:py-4 text-gray-500 hover:text-gray-600 mr-6">Logout</router-link>
+        <button @click="logout" class="flex justify-center md:inline-block py-1 md:py-4 text-gray-500 hover:text-gray-600 mr-6">Logout</button>
       </div>
     </div>
   </div>
@@ -40,18 +40,22 @@
             return this.$store.state.user.currentUser; // Use a getter instead of this.
           }
         },
-
-          methods: {
-            changeMode(){
-                let htmlClasses = document.querySelector('html').classList;
-                if(localStorage.theme == 'dark') {
-                    htmlClasses.remove('dark');
-                    localStorage.removeItem('theme')
-                } else {
-                    htmlClasses.add('dark');
-                    localStorage.theme = 'dark';
-                }
-            } 
+        methods: {
+          logout(){
+            console.log(this.$store);
+            this.$store.dispatch('user/logout');
+            this.$router.push('/login');              
+          },
+          changeMode(){
+              let htmlClasses = document.querySelector('html').classList;
+              if(localStorage.theme == 'dark') {
+                  htmlClasses.remove('dark');
+                  localStorage.removeItem('theme')
+              } else {
+                  htmlClasses.add('dark');
+                  localStorage.theme = 'dark';
+              }
+          } 
         },
         data(){
             return{
@@ -95,5 +99,8 @@
     .fa-chevron-circle-down{
         transform: rotate(0deg);
         transition: all .2s ease-in-out;
+    }
+    .router-link-active{
+      font-weight: bold;
     }
 </style>
