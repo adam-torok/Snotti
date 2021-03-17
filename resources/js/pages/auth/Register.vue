@@ -19,12 +19,25 @@
         </div>
         <div class="p-5 bg-white md:flex-1">
           <h3 class="my-4 text-2xl font-semibold text-gray-700">Register an account</h3>
-          <form action="#" class="flex flex-col space-y-5">
+          <form @submit.prevent="registrate" class="flex flex-col space-y-5">
             <div class="flex flex-col space-y-1">
               <label for="email" class="text-sm font-semibold text-gray-500">Email address</label>
               <input
+                v-model="form.email"
                 type="email"
+                name="email"
                 id="email"
+                autofocus
+                class="px-4 py-2 transition duration-300 border border-gray-300 rounded focus:border-transparent focus:outline-none focus:ring-4 focus:ring-gray-200"
+              />
+            </div>
+                <div class="flex flex-col space-y-1">
+              <label for="name" class="text-sm font-semibold text-gray-500">Your Name</label>
+              <input
+                v-model="form.name"
+                type="text"
+                name="name"
+                id="name"
                 autofocus
                 class="px-4 py-2 transition duration-300 border border-gray-300 rounded focus:border-transparent focus:outline-none focus:ring-4 focus:ring-gray-200"
               />
@@ -34,7 +47,9 @@
                 <label for="password" class="text-sm font-semibold text-gray-500">Password</label>
               </div>
               <input
+                v-model="form.password"
                 type="password"
+                name="password"
                 id="password"
                 class="px-4 py-2 transition duration-300 border border-gray-300 rounded focus:border-transparent focus:outline-none focus:ring-4 focus:ring-gray-200"
               />
@@ -45,6 +60,7 @@
               </div>
               <input
                 type="password"
+                name="password_again"
                 id="password_again"
                 class="px-4 py-2 transition duration-300 border border-gray-300 rounded focus:border-transparent focus:outline-none focus:ring-4 focus:ring-gray-200"
               />
@@ -72,7 +88,31 @@
 
 <script>
 export default {
-
+  data(){
+    return{
+      form:{
+        email : '',
+        name : '',
+        password : ''
+      }
+    }
+  },
+  methods:{
+    registrate() {
+      axios.post('/api/registrate', this.form)
+          .then(() => {
+              this.$router.push({ path: '/login' })
+              setTimeout(() => {
+                  //this.$store.dispatch('alert/success', 'Registration successful');
+              })
+          })
+          .catch((err) =>{
+              setTimeout(() => {
+                  //this.$store.dispatch('alert/error', err);
+            })
+        })
+    },
+  }
 }
 </script>
 

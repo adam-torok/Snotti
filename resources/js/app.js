@@ -1,13 +1,19 @@
 require('./bootstrap');
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-import { routes } from './routes';
-import MainApp from './Main'
-Vue.use(VueRouter);
 
 import svgSpriteLoader from './helpers/svg-sprite-loader'
+
+import Vue from 'vue'
+import VueRouter from 'vue-router'
+import Vuex from 'vuex'
+import { routes } from './routes';
+import store from './store'
+import MainApp from './Main'
+Vue.use(VueRouter)
+Vue.use(Vuex)
+
 const __svg__ = { path: '../icons/*.svg', name: '../icons/[hash].sprite.svg' }
 svgSpriteLoader(__svg__.filename)
+
 
 const router = new VueRouter({
     routes,
@@ -16,6 +22,7 @@ const router = new VueRouter({
 
 const app = new Vue({
     router,
+    store,
     el: '#app',
     components: {
         MainApp
