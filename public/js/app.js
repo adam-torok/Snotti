@@ -2778,11 +2778,12 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _helpers_svg_sprite_loader__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./helpers/svg-sprite-loader */ "./resources/js/helpers/svg-sprite-loader.js");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
-/* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
+/* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm.js");
 /* harmony import */ var _routes__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./routes */ "./resources/js/routes.js");
-/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./store */ "./resources/js/store/index.js");
-/* harmony import */ var _Main__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Main */ "./resources/js/Main.vue");
+/* harmony import */ var _helpers_init__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./helpers/init */ "./resources/js/helpers/init.js");
+/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./store */ "./resources/js/store/index.js");
+/* harmony import */ var _Main__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Main */ "./resources/js/Main.vue");
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 
@@ -2791,22 +2792,24 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 
 
-vue__WEBPACK_IMPORTED_MODULE_4__.default.use(vue_router__WEBPACK_IMPORTED_MODULE_5__.default);
+
+vue__WEBPACK_IMPORTED_MODULE_5__.default.use(vue_router__WEBPACK_IMPORTED_MODULE_6__.default);
 var __svg__ = {
   path: '../icons/*.svg',
   name: '../icons/[hash].sprite.svg'
 };
 (0,_helpers_svg_sprite_loader__WEBPACK_IMPORTED_MODULE_0__.default)(__svg__.filename);
-var router = new vue_router__WEBPACK_IMPORTED_MODULE_5__.default({
+var router = new vue_router__WEBPACK_IMPORTED_MODULE_6__.default({
   routes: _routes__WEBPACK_IMPORTED_MODULE_1__.routes,
   mode: 'history'
 });
-var app = new vue__WEBPACK_IMPORTED_MODULE_4__.default({
+(0,_helpers_init__WEBPACK_IMPORTED_MODULE_2__.initialize)(_store__WEBPACK_IMPORTED_MODULE_3__.default, router);
+var app = new vue__WEBPACK_IMPORTED_MODULE_5__.default({
   router: router,
-  store: _store__WEBPACK_IMPORTED_MODULE_2__.default,
+  store: _store__WEBPACK_IMPORTED_MODULE_3__.default,
   el: '#app',
   components: {
-    MainApp: _Main__WEBPACK_IMPORTED_MODULE_3__.default
+    MainApp: _Main__WEBPACK_IMPORTED_MODULE_4__.default
   }
 });
 
@@ -2826,6 +2829,50 @@ try {
 
 window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+
+/***/ }),
+
+/***/ "./resources/js/helpers/init.js":
+/*!**************************************!*\
+  !*** ./resources/js/helpers/init.js ***!
+  \**************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "initialize": () => (/* binding */ initialize)
+/* harmony export */ });
+function initialize(store, router) {
+  router.beforeEach(function (to, from, next) {
+    var requiresAuth = to.matched.some(function (record) {
+      return record.meta.requiresAuth;
+    });
+    var currentUser = store.state.user.currentUser;
+    ;
+    console.log(currentUser);
+
+    if (requiresAuth && !currentUser) {
+      next('/login');
+    } else if (to.path == '/login' && currentUser) {
+      next('/');
+    } else {
+      next();
+    }
+  });
+  axios.interceptors.response.use(null, function (error) {
+    if (error.response.status == 401) {
+      store.commit('LOGOUT');
+      router.push('/login');
+    }
+
+    return Promise.reject(error);
+  });
+
+  if (store.getters.currentUser) {
+    setAuthorization(store.state.user.currentUser.token);
+  }
+}
 
 /***/ }),
 
@@ -2955,34 +3002,65 @@ __webpack_require__.r(__webpack_exports__);
 
 var routes = [{
   path: '/',
-  component: _pages_common_Home_vue__WEBPACK_IMPORTED_MODULE_0__.default
+  component: _pages_common_Home_vue__WEBPACK_IMPORTED_MODULE_0__.default,
+  meta: {
+    requiresAuth: false
+  }
 }, {
   path: '/about',
-  component: _pages_common_About_vue__WEBPACK_IMPORTED_MODULE_1__.default
+  component: _pages_common_About_vue__WEBPACK_IMPORTED_MODULE_1__.default,
+  meta: {
+    requiresAuth: false
+  }
 }, {
   path: '/details',
-  component: _pages_common_Details_vue__WEBPACK_IMPORTED_MODULE_2__.default
+  component: _pages_common_Details_vue__WEBPACK_IMPORTED_MODULE_2__.default,
+  meta: {
+    requiresAuth: false
+  }
 }, {
   path: '/login',
-  component: _pages_auth_Login_vue__WEBPACK_IMPORTED_MODULE_3__.default
+  component: _pages_auth_Login_vue__WEBPACK_IMPORTED_MODULE_3__.default,
+  meta: {
+    requiresAuth: false
+  }
 }, {
   path: '/register',
-  component: _pages_auth_Register_vue__WEBPACK_IMPORTED_MODULE_4__.default
+  component: _pages_auth_Register_vue__WEBPACK_IMPORTED_MODULE_4__.default,
+  meta: {
+    requiresAuth: false
+  }
 }, {
   path: '/folders',
-  component: _pages_notes_Folders_vue__WEBPACK_IMPORTED_MODULE_5__.default
+  component: _pages_notes_Folders_vue__WEBPACK_IMPORTED_MODULE_5__.default,
+  meta: {
+    requiresAuth: true
+  }
 }, {
   path: '/notes',
-  component: _pages_notes_Index_vue__WEBPACK_IMPORTED_MODULE_6__.default
+  component: _pages_notes_Index_vue__WEBPACK_IMPORTED_MODULE_6__.default,
+  meta: {
+    requiresAuth: true
+  }
 }, {
   path: '/note/create',
-  component: _pages_notes_Create_vue__WEBPACK_IMPORTED_MODULE_9__.default
+  component: _pages_notes_Create_vue__WEBPACK_IMPORTED_MODULE_9__.default,
+  meta: {
+    requiresAuth: true
+  }
 }, {
   path: '/note/:id',
-  component: _pages_notes_show_vue__WEBPACK_IMPORTED_MODULE_7__.default
+  component: _pages_notes_show_vue__WEBPACK_IMPORTED_MODULE_7__.default,
+  props: true,
+  meta: {
+    requiresAuth: true
+  }
 }, {
   path: '/note/:id/edit',
-  component: _pages_notes_edit_vue__WEBPACK_IMPORTED_MODULE_8__.default
+  component: _pages_notes_edit_vue__WEBPACK_IMPORTED_MODULE_8__.default,
+  meta: {
+    requiresAuth: false
+  }
 }];
 
 /***/ }),

@@ -11,14 +11,54 @@ import EditNote from './pages/notes/edit.vue'
 import CreateNote from './pages/notes/Create.vue'
 
 export const routes = [
-   {path : '/', component : Home},
-   {path : '/about', component : About},
-   {path : '/details', component : Details},
-   {path : '/login', component : Login},
-   {path : '/register', component : Register},
-   {path : '/folders', component : Folders},
-   {path : '/notes', component : Notes},
-   {path : '/note/create', component : CreateNote},
-   {path : '/note/:id', component : Note},
-   {path : '/note/:id/edit', component : EditNote},
+   {path : '/', component : Home ,
+      meta : {
+         requiresAuth : false,
+      }
+   },
+   {path : '/about', component : About,
+      meta : {
+         requiresAuth : false,
+      }
+   },
+   {path : '/details', component : Details,
+      meta : {
+         requiresAuth : false,
+      }
+   },
+   {path : '/login', component : Login,
+    meta : {
+         requiresAuth : false,
+      }
+   },
+   {path : '/register', component : Register,
+    meta : {
+         requiresAuth : false,
+      }
+   },
+   {path : '/folders', component : Folders,
+    meta : {
+      requiresAuth : true,
+   }},
+   {path : '/notes', component : Notes,
+    meta : {
+         requiresAuth : true,
+      }
+   },
+   {path : '/note/create', component : CreateNote,
+    meta : {
+         requiresAuth : true,
+      }
+   },
+   {path : '/note/:id', component : Note,
+   props: true,
+    meta : {
+         requiresAuth : true,
+      }
+   },
+   {path : '/note/:id/edit', component : EditNote,
+    meta : {
+         requiresAuth : false,
+      }
+   },
 ]
