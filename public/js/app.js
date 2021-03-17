@@ -2152,6 +2152,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+//
+//
+//
 //
 //
 //
@@ -2232,7 +2242,34 @@ __webpack_require__.r(__webpack_exports__);
       }
     };
   },
-  mounted: function mounted() {}
+  methods: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapActions)({
+    login: "login"
+  })), {}, {
+    authenticate: function authenticate() {
+      var _this = this;
+
+      console.log(this.$store);
+      this.isLoading = true;
+      this.loginText = "Logging in";
+      setTimeout(function () {
+        console.log(_this.$store);
+
+        _this.$store.dispatch('user/login', _this.$data.form).then(function (res) {
+          _this.$store.commit("LOGIN_SUCCESS", res);
+
+          _this.$router.push({
+            path: "/folders"
+          });
+        })["catch"](function (error) {
+          setTimeout(function () {
+            //this.$store.dispatch('alert/error', error);
+            _this.loginText = "Login";
+            _this.isLoading = false;
+          }, 1000);
+        });
+      }, 2000);
+    }
+  })
 });
 
 /***/ }),
@@ -2737,7 +2774,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _helpers_svg_sprite_loader__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./helpers/svg-sprite-loader */ "./resources/js/helpers/svg-sprite-loader.js");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
 /* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm.js");
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 /* harmony import */ var _routes__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./routes */ "./resources/js/routes.js");
 /* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./store */ "./resources/js/store/index.js");
 /* harmony import */ var _Main__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Main */ "./resources/js/Main.vue");
@@ -2749,9 +2785,7 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 
 
-
 vue__WEBPACK_IMPORTED_MODULE_4__.default.use(vue_router__WEBPACK_IMPORTED_MODULE_5__.default);
-vue__WEBPACK_IMPORTED_MODULE_4__.default.use(vuex__WEBPACK_IMPORTED_MODULE_6__.default);
 var __svg__ = {
   path: '../icons/*.svg',
   name: '../icons/[hash].sprite.svg'
@@ -2958,32 +2992,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-/* harmony import */ var _modules_notes__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/notes */ "./resources/js/store/modules/notes.js");
-/* harmony import */ var _modules_notes__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_modules_notes__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _modules_user__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/user */ "./resources/js/store/modules/user.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _modules_user__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/user */ "./resources/js/store/modules/user.js");
+
+ //import notes from './modules/notes'
 
 
-
-
-vue__WEBPACK_IMPORTED_MODULE_2__.default.use(vuex__WEBPACK_IMPORTED_MODULE_3__.default);
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (new vuex__WEBPACK_IMPORTED_MODULE_3__.default.Store({
+vue__WEBPACK_IMPORTED_MODULE_1__.default.use(vuex__WEBPACK_IMPORTED_MODULE_2__.default);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (new vuex__WEBPACK_IMPORTED_MODULE_2__.default.Store({
   modules: {
-    notes: (_modules_notes__WEBPACK_IMPORTED_MODULE_0___default()),
-    user: _modules_user__WEBPACK_IMPORTED_MODULE_1__.default
+    //notes,
+    user: _modules_user__WEBPACK_IMPORTED_MODULE_0__.default
   }
 }));
-
-/***/ }),
-
-/***/ "./resources/js/store/modules/notes.js":
-/*!*********************************************!*\
-  !*** ./resources/js/store/modules/notes.js ***!
-  \*********************************************/
-/***/ (() => {
-
-
 
 /***/ }),
 
@@ -3015,7 +3037,7 @@ var state = function state() {
     currentUser: user,
     isLoggedIn: !!user,
     loading: false,
-    authError: null
+    authError: []
   };
 };
 
@@ -57867,90 +57889,122 @@ var render = function() {
               [_vm._v("Account Login")]
             ),
             _vm._v(" "),
-            _c("form", { staticClass: "flex flex-col space-y-5" }, [
-              _c("div", { staticClass: "flex flex-col space-y-1" }, [
-                _c(
-                  "label",
-                  {
-                    staticClass: "text-sm font-semibold text-gray-500",
-                    attrs: { for: "email" }
-                  },
-                  [_vm._v("Email address")]
-                ),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.form.email,
-                      expression: "form.email"
-                    }
-                  ],
-                  staticClass:
-                    "px-4 py-2 transition duration-300 border border-gray-300 rounded focus:border-transparent focus:outline-none focus:ring-4 focus:ring-gray-200",
-                  attrs: { type: "email", id: "email", autofocus: "" },
-                  domProps: { value: _vm.form.email },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(_vm.form, "email", $event.target.value)
-                    }
+            _c(
+              "form",
+              {
+                staticClass: "flex flex-col space-y-5",
+                on: {
+                  submit: function($event) {
+                    $event.preventDefault()
+                    return _vm.authenticate($event)
                   }
-                })
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "flex flex-col space-y-1" }, [
-                _vm._m(2),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
+                }
+              },
+              [
+                _c("div", { staticClass: "flex flex-col space-y-1" }, [
+                  _c(
+                    "label",
                     {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.form.password,
-                      expression: "form.password"
-                    }
-                  ],
-                  staticClass:
-                    "px-4 py-2 transition duration-300 border border-gray-300 rounded focus:border-transparent focus:outline-none focus:ring-4 focus:ring-gray-200",
-                  attrs: { type: "password", id: "password" },
-                  domProps: { value: _vm.form.password },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
+                      staticClass: "text-sm font-semibold text-gray-500",
+                      attrs: { for: "email" }
+                    },
+                    [_vm._v("Email address")]
+                  ),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.form.email,
+                        expression: "form.email"
                       }
-                      _vm.$set(_vm.form, "password", $event.target.value)
-                    }
-                  }
-                })
-              ]),
-              _vm._v(" "),
-              _vm._m(3),
-              _vm._v(" "),
-              _c("div", [
-                _c(
-                  "button",
-                  {
+                    ],
                     staticClass:
-                      "w-full px-4 py-2 text-lg font-semibold text-white transition-colors duration-300 bg-gray-500 rounded-md shadow hover:bg-gray-600 focus:outline-none focus:ring-gray-200 focus:ring-4",
-                    attrs: { type: "submit" }
-                  },
-                  [
-                    _vm._v(
-                      "\n                " +
-                        _vm._s(_vm.loginText) +
-                        "\n              "
-                    )
-                  ]
-                )
-              ]),
-              _vm._v(" "),
-              _vm._m(4)
-            ])
+                      "px-4 py-2 transition duration-300 border border-gray-300 rounded focus:border-transparent focus:outline-none focus:ring-4 focus:ring-gray-200",
+                    attrs: {
+                      name: "email",
+                      type: "email",
+                      id: "email",
+                      autofocus: ""
+                    },
+                    domProps: { value: _vm.form.email },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.form, "email", $event.target.value)
+                      }
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex flex-col space-y-1" }, [
+                  _vm._m(2),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.form.password,
+                        expression: "form.password"
+                      }
+                    ],
+                    staticClass:
+                      "px-4 py-2 transition duration-300 border border-gray-300 rounded focus:border-transparent focus:outline-none focus:ring-4 focus:ring-gray-200",
+                    attrs: {
+                      type: "password",
+                      name: "password",
+                      id: "password"
+                    },
+                    domProps: { value: _vm.form.password },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.form, "password", $event.target.value)
+                      }
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _vm._m(3),
+                _vm._v(" "),
+                _c("div", [
+                  _c(
+                    "button",
+                    {
+                      staticClass:
+                        "w-full px-4 py-2 text-lg font-semibold text-white transition-colors duration-300 bg-gray-500 rounded-md shadow hover:bg-gray-600 focus:outline-none focus:ring-gray-200 focus:ring-4",
+                      attrs: { type: "submit" }
+                    },
+                    [
+                      _vm._v(
+                        "\n                " +
+                          _vm._s(_vm.loginText) +
+                          "\n                  "
+                      ),
+                      _c("i", {
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value: _vm.isLoading,
+                            expression: "isLoading"
+                          }
+                        ],
+                        staticClass: "fas fa-spinner fa-spin"
+                      })
+                    ]
+                  )
+                ]),
+                _vm._v(" "),
+                _vm._m(4)
+              ]
+            )
           ])
         ]
       )
