@@ -4,7 +4,7 @@
   <div class="bg-gray-200">
     <div class="px-4 py-16">
       <div class="relative w-full md:max-w-2xl md:mx-auto text-center">
-        <h1 class="font-bold text-gray-700 text-xl sm:text-2xl md:text-5xl leading-tight mb-6">Snotti - a simple note taking app inspired by Apple Notes</h1>
+        <h1 class="animate__animated animate__fadeIn  font-bold text-gray-700 text-xl sm:text-2xl md:text-5xl leading-tight mb-6">Snotti - a simple note taking app inspired by Apple Notes</h1>
         <p class="text-gray-600 md:text-xl md:px-18">
           I do not own any right in the apple logo, or used resources.
         </p>

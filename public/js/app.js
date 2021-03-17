@@ -3063,10 +3063,12 @@ var actions = {
         setAuthorization(response.data.access_token);
         res(response.data);
       })["catch"](function (err) {
-        console.log(err);
         rej("Wrong email or password");
       });
     });
+  },
+  logout: function logout(content) {
+    content.commit("LOGOUT");
   }
 };
 var mutations = {
@@ -58814,7 +58816,7 @@ var staticRenderFns = [
             "h1",
             {
               staticClass:
-                "font-bold text-gray-700 text-xl sm:text-2xl md:text-5xl leading-tight mb-6"
+                "animate__animated animate__fadeIn  font-bold text-gray-700 text-xl sm:text-2xl md:text-5xl leading-tight mb-6"
             },
             [
               _vm._v(
