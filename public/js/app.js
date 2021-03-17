@@ -2220,9 +2220,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  data: function data() {
+    return {
+      isLoading: false,
+      loginText: 'Login',
+      form: {
+        email: '',
+        password: ''
+      }
+    };
+  }
+});
 
 /***/ }),
 
@@ -57635,7 +57644,98 @@ var render = function() {
             ]
           ),
           _vm._v(" "),
-          _vm._m(2)
+          _c("div", { staticClass: "p-5 bg-white md:flex-1" }, [
+            _c(
+              "h3",
+              { staticClass: "my-4 text-2xl font-semibold text-gray-700" },
+              [_vm._v("Account Login")]
+            ),
+            _vm._v(" "),
+            _c("form", { staticClass: "flex flex-col space-y-5" }, [
+              _c("div", { staticClass: "flex flex-col space-y-1" }, [
+                _c(
+                  "label",
+                  {
+                    staticClass: "text-sm font-semibold text-gray-500",
+                    attrs: { for: "email" }
+                  },
+                  [_vm._v("Email address")]
+                ),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.form.email,
+                      expression: "form.email"
+                    }
+                  ],
+                  staticClass:
+                    "px-4 py-2 transition duration-300 border border-gray-300 rounded focus:border-transparent focus:outline-none focus:ring-4 focus:ring-gray-200",
+                  attrs: { type: "email", id: "email", autofocus: "" },
+                  domProps: { value: _vm.form.email },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.form, "email", $event.target.value)
+                    }
+                  }
+                })
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "flex flex-col space-y-1" }, [
+                _vm._m(2),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.form.password,
+                      expression: "form.password"
+                    }
+                  ],
+                  staticClass:
+                    "px-4 py-2 transition duration-300 border border-gray-300 rounded focus:border-transparent focus:outline-none focus:ring-4 focus:ring-gray-200",
+                  attrs: { type: "password", id: "password" },
+                  domProps: { value: _vm.form.password },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.form, "password", $event.target.value)
+                    }
+                  }
+                })
+              ]),
+              _vm._v(" "),
+              _vm._m(3),
+              _vm._v(" "),
+              _c("div", [
+                _c(
+                  "button",
+                  {
+                    staticClass:
+                      "w-full px-4 py-2 text-lg font-semibold text-white transition-colors duration-300 bg-gray-500 rounded-md shadow hover:bg-gray-600 focus:outline-none focus:ring-gray-200 focus:ring-4",
+                    attrs: { type: "submit" }
+                  },
+                  [
+                    _vm._v(
+                      "\n                " +
+                        _vm._s(_vm.loginText) +
+                        "\n              "
+                    )
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _vm._m(4)
+            ])
+          ])
         ]
       )
     ]
@@ -57675,95 +57775,54 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "p-5 bg-white md:flex-1" }, [
-      _c("h3", { staticClass: "my-4 text-2xl font-semibold text-gray-700" }, [
-        _vm._v("Account Login")
-      ]),
+    return _c("div", { staticClass: "flex items-center justify-between" }, [
+      _c(
+        "label",
+        {
+          staticClass: "text-sm font-semibold text-gray-500",
+          attrs: { for: "password" }
+        },
+        [_vm._v("Password")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "flex items-center space-x-2" }, [
+      _c("input", {
+        staticClass:
+          "w-4 h-4 transition duration-300 rounded focus:ring-2 focus:ring-offset-0 focus:outline-none focus:ring-gray-200",
+        attrs: { type: "checkbox", id: "remember" }
+      }),
       _vm._v(" "),
       _c(
-        "form",
-        { staticClass: "flex flex-col space-y-5", attrs: { action: "#" } },
+        "label",
+        {
+          staticClass: "text-sm font-semibold text-gray-500",
+          attrs: { for: "remember" }
+        },
+        [_vm._v("Remember me")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "flex flex-col space-y-5" }, [
+      _c(
+        "span",
+        { staticClass: "flex items-center justify-center space-x-2" },
         [
-          _c("div", { staticClass: "flex flex-col space-y-1" }, [
-            _c(
-              "label",
-              {
-                staticClass: "text-sm font-semibold text-gray-500",
-                attrs: { for: "email" }
-              },
-              [_vm._v("Email address")]
-            ),
-            _vm._v(" "),
-            _c("input", {
-              staticClass:
-                "px-4 py-2 transition duration-300 border border-gray-300 rounded focus:border-transparent focus:outline-none focus:ring-4 focus:ring-gray-200",
-              attrs: { type: "email", id: "email", autofocus: "" }
-            })
+          _c("span", { staticClass: "h-px bg-gray-400 w-14" }),
+          _vm._v(" "),
+          _c("span", { staticClass: "font-normal text-gray-500" }, [
+            _vm._v("It is Completely free. And will be free.")
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "flex flex-col space-y-1" }, [
-            _c("div", { staticClass: "flex items-center justify-between" }, [
-              _c(
-                "label",
-                {
-                  staticClass: "text-sm font-semibold text-gray-500",
-                  attrs: { for: "password" }
-                },
-                [_vm._v("Password")]
-              )
-            ]),
-            _vm._v(" "),
-            _c("input", {
-              staticClass:
-                "px-4 py-2 transition duration-300 border border-gray-300 rounded focus:border-transparent focus:outline-none focus:ring-4 focus:ring-gray-200",
-              attrs: { type: "password", id: "password" }
-            })
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "flex items-center space-x-2" }, [
-            _c("input", {
-              staticClass:
-                "w-4 h-4 transition duration-300 rounded focus:ring-2 focus:ring-offset-0 focus:outline-none focus:ring-gray-200",
-              attrs: { type: "checkbox", id: "remember" }
-            }),
-            _vm._v(" "),
-            _c(
-              "label",
-              {
-                staticClass: "text-sm font-semibold text-gray-500",
-                attrs: { for: "remember" }
-              },
-              [_vm._v("Remember me")]
-            )
-          ]),
-          _vm._v(" "),
-          _c("div", [
-            _c(
-              "button",
-              {
-                staticClass:
-                  "w-full px-4 py-2 text-lg font-semibold text-white transition-colors duration-300 bg-gray-500 rounded-md shadow hover:bg-gray-600 focus:outline-none focus:ring-gray-200 focus:ring-4",
-                attrs: { type: "submit" }
-              },
-              [_vm._v("\n                Login\n              ")]
-            )
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "flex flex-col space-y-5" }, [
-            _c(
-              "span",
-              { staticClass: "flex items-center justify-center space-x-2" },
-              [
-                _c("span", { staticClass: "h-px bg-gray-400 w-14" }),
-                _vm._v(" "),
-                _c("span", { staticClass: "font-normal text-gray-500" }, [
-                  _vm._v("It is Completely free. And will be free.")
-                ]),
-                _vm._v(" "),
-                _c("span", { staticClass: "h-px bg-gray-400 w-14" })
-              ]
-            )
-          ])
+          _c("span", { staticClass: "h-px bg-gray-400 w-14" })
         ]
       )
     ])
