@@ -83,18 +83,14 @@ export default {
     }
   },
      methods: {
-      ...mapActions({
-         login: "login",
-      }),
+
       authenticate() {
-        console.log(this.$store);
          this.isLoading = true;
          this.loginText = "Logging in";
          setTimeout(() => {
-           console.log(this.$store);
             this.$store.dispatch('user/login',this.$data.form)
                .then((res) => {
-                  this.$store.commit("LOGIN_SUCCESS", res);
+                  this.$store.commit("user/LOGIN_SUCCESS", res);
                   this.$router.push({ path: "/folders" });
                })
                .catch((error) => {

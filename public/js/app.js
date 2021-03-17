@@ -2152,13 +2152,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 //
 //
 //
@@ -2242,20 +2235,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }
     };
   },
-  methods: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapActions)({
-    login: "login"
-  })), {}, {
+  methods: {
     authenticate: function authenticate() {
       var _this = this;
 
-      console.log(this.$store);
       this.isLoading = true;
       this.loginText = "Logging in";
       setTimeout(function () {
-        console.log(_this.$store);
-
         _this.$store.dispatch('user/login', _this.$data.form).then(function (res) {
-          _this.$store.commit("LOGIN_SUCCESS", res);
+          _this.$store.commit("user/LOGIN_SUCCESS", res);
 
           _this.$router.push({
             path: "/folders"
@@ -2269,7 +2257,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         });
       }, 2000);
     }
-  })
+  }
 });
 
 /***/ }),
@@ -3041,30 +3029,25 @@ var state = function state() {
   };
 };
 
-var getters = function getters() {
-  isLoading = function isLoading(state) {
+var getters = {
+  isLoading: function isLoading(state) {
     return state.loading;
-  };
-
-  isLoggedIn = function isLoggedIn(state) {
+  },
+  isLoggedIn: function isLoggedIn(state) {
     return state.isLoggedIn;
-  };
-
-  currentUser = function currentUser(state) {
+  },
+  currentUser: function currentUser(state) {
     return state.currentUser;
-  };
-
-  authError = function authError(state) {
+  },
+  authError: function authError(state) {
     return state.authError;
-  };
+  }
 };
-
-var actions = function actions() {
-  login = function login(_ref, credentials) {
-    var commit = _ref.commit;
+var actions = {
+  login: function login(credentials) {
     return new Promise(function (res, rej) {
       axios.post('/api/auth/login', credentials).then(function (response) {
-        console.log(credentials);
+        console.log(resposne);
         setAuthorization(response.data.access_token);
         res(response.data);
       })["catch"](function (err) {
@@ -3072,11 +3055,11 @@ var actions = function actions() {
         rej("Wrong email or password");
       });
     });
-  };
+  }
 };
-
-var mutations = function mutations() {
-  SET_USER_INFORMATIONS = function SET_USER_INFORMATIONS(state, user) {
+var mutations = {
+  SET_USER_INFORMATIONS: function SET_USER_INFORMATIONS(state, _ref) {
+    var user = _ref.user;
     var bio = user.bio,
         public_email = user.public_email,
         city = user.city,
@@ -3085,12 +3068,12 @@ var mutations = function mutations() {
     state.currentUser.public_email = public_email;
     state.currentUser.city = city;
     state.currentUser.web = web;
-  }, LOGIN = function LOGIN(state) {
+  },
+  LOGIN: function LOGIN(state) {
     state.loading = true;
     state.authError = null;
-  };
-
-  LOGIN_SUCCESS = function LOGIN_SUCCESS(state, payload) {
+  },
+  LOGIN_SUCCESS: function LOGIN_SUCCESS(state, payload) {
     state.authError = null;
     state.isLoggedIn = true;
     state.loading = false;
@@ -3098,18 +3081,16 @@ var mutations = function mutations() {
       token: payload.access_token
     });
     localStorage.setItem("user", JSON.stringify(state.currentUser));
-  };
-
-  LOGIN_FAILED = function LOGIN_FAILED(state, payload) {
+  },
+  LOGIN_FAILED: function LOGIN_FAILED(state, payload) {
     state.loading = false;
     state.authError = payload.error;
-  };
-
-  LOGOUT = function LOGOUT(state) {
+  },
+  LOGOUT: function LOGOUT(state) {
     localStorage.removeItem("user");
     state.isLoggedIn = false;
     state.currentUser = null;
-  };
+  }
 };
 
 function setAuthorization(token) {
