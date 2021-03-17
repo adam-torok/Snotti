@@ -2117,8 +2117,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'app-header',
+  computed: {
+    currentUser: function currentUser() {
+      return this.$store.state.user.currentUser; // Use a getter instead of this.
+    }
+  },
   methods: {
     changeMode: function changeMode() {
       var htmlClasses = document.querySelector('html').classList;
@@ -2244,6 +2253,8 @@ __webpack_require__.r(__webpack_exports__);
       setTimeout(function () {
         _this.$store.dispatch('user/login', _this.$data.form).then(function (res) {
           _this.$store.commit("user/LOGIN_SUCCESS", res);
+
+          console.log(res);
 
           _this.$router.push({
             path: "/folders"
@@ -3019,6 +3030,7 @@ function getLocalUser() {
 }
 
 var user = getLocalUser();
+console.log(user);
 
 var state = function state() {
   return {
@@ -3044,10 +3056,10 @@ var getters = {
   }
 };
 var actions = {
-  login: function login(credentials) {
+  login: function login(_ref, credentials) {
+    var commit = _ref.commit;
     return new Promise(function (res, rej) {
       axios.post('/api/auth/login', credentials).then(function (response) {
-        console.log(resposne);
         setAuthorization(response.data.access_token);
         res(response.data);
       })["catch"](function (err) {
@@ -3058,8 +3070,8 @@ var actions = {
   }
 };
 var mutations = {
-  SET_USER_INFORMATIONS: function SET_USER_INFORMATIONS(state, _ref) {
-    var user = _ref.user;
+  SET_USER_INFORMATIONS: function SET_USER_INFORMATIONS(state, _ref2) {
+    var user = _ref2.user;
     var bio = user.bio,
         public_email = user.public_email,
         city = user.city,
@@ -57720,7 +57732,6 @@ var render = function() {
         _c("div", [
           _c(
             "div",
-            {},
             [
               _c(
                 "router-link",
@@ -57747,50 +57758,70 @@ var render = function() {
         ]),
         _vm._v(" "),
         _c("div", [
-          _c(
-            "div",
-            { staticClass: "hidden" },
-            [
-              _c(
-                "router-link",
-                {
-                  staticClass:
-                    "inline-block py-1 md:py-4 text-gray-600 mr-6 font-bold",
-                  attrs: { to: "/folders" }
-                },
-                [_c("i", { staticClass: "fas fa-lg fa-folder-open" })]
+          _vm.currentUser
+            ? _c(
+                "div",
+                [
+                  _c(
+                    "router-link",
+                    {
+                      staticClass:
+                        "inline-block py-1 md:py-4 text-gray-600 mr-6 font-bold",
+                      attrs: { to: "/folders" }
+                    },
+                    [_c("i", { staticClass: "fas fa-lg fa-folder-open" })]
+                  )
+                ],
+                1
               )
-            ],
-            1
-          )
+            : _vm._e()
         ]),
         _vm._v(" "),
-        _c(
-          "div",
-          {},
-          [
-            _c(
-              "router-link",
-              {
-                staticClass:
-                  "flex justify-center md:inline-block py-1 md:py-4 text-gray-500 hover:text-gray-600 mr-6",
-                attrs: { to: "/login" }
-              },
-              [_vm._v("Login")]
-            ),
-            _vm._v(" "),
-            _c(
-              "router-link",
-              {
-                staticClass:
-                  "flex justify-center md:inline-block py-2 px-4 text-gray-700 bg-white hover:bg-gray-100 rounded-lg",
-                attrs: { to: "/register" }
-              },
-              [_vm._v("Register for free")]
+        !_vm.currentUser
+          ? _c(
+              "div",
+              [
+                _c(
+                  "router-link",
+                  {
+                    staticClass:
+                      "flex justify-center md:inline-block py-1 md:py-4 text-gray-500 hover:text-gray-600 mr-6",
+                    attrs: { to: "/login" }
+                  },
+                  [_vm._v("Login")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "router-link",
+                  {
+                    staticClass:
+                      "flex justify-center md:inline-block py-2 px-4 text-gray-700 bg-white hover:bg-gray-100 rounded-lg",
+                    attrs: { to: "/register" }
+                  },
+                  [_vm._v("Register for free")]
+                )
+              ],
+              1
             )
-          ],
-          1
-        )
+          : _vm._e(),
+        _vm._v(" "),
+        _vm.currentUser
+          ? _c(
+              "div",
+              [
+                _c(
+                  "router-link",
+                  {
+                    staticClass:
+                      "flex justify-center md:inline-block py-1 md:py-4 text-gray-500 hover:text-gray-600 mr-6",
+                    attrs: { to: "/logout" }
+                  },
+                  [_vm._v("Logout")]
+                )
+              ],
+              1
+            )
+          : _vm._e()
       ]
     )
   ])
