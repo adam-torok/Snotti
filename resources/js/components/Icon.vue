@@ -9,7 +9,7 @@
 <script>
 export default {
 	mounted(){
-		console.log(this.name);
+
 	},
 	props: {
 		name: {},
