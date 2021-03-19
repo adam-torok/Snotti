@@ -11,7 +11,6 @@
         <link rel="icon" type="image/png" sizes="16x16" href="../favicon/favicon-16x16.png">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
         <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-        <link rel="manifest" href="../favicon/site.webmanifest">
     </head>
     <body class="antialised">
         <div id="app">

@@ -38,6 +38,11 @@ class User extends Authenticatable implements JWTSubject
         return [];
     }
 
+    public function folder()
+    {
+        return $this->hasMany(Folder::class);
+    }
+
     public function setPasswordAttribute($password)
     {
         $this->attributes['password'] = bcrypt($password);

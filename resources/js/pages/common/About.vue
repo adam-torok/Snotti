@@ -29,12 +29,7 @@
 
   <p class="text-center p-4 text-gray-600 mt-10">
     Created by
-    <a class="border-b text-gray-400" href="https://adam-torok.netlify.app/" target="_blank">Adam Torok</a>. Inspired by dribble shot
-    <a
-      href="https://dribbble.com/shots/8807920-Quickpay-Hero-section/attachments/1015863"
-      target="_blank"
-      class="border-b text-gray-400"
-      >https://dribbble.com/vadimdrut</a>
+    <a class="border-b text-gray-400" href="https://adam-torok.netlify.app/" target="_blank">Adam Torok</a>. Inspired by Apple
   </p>
   </div>
 </div>

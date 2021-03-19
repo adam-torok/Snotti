@@ -1,8 +1,5 @@
 <template>
   <div class="flex flex-col bg-gray-200">
-    <div class="flex justify-end p-2">
-      <router-link class="icon m-2" to="/notes">Edit</router-link>
-    </div>
     <div class="notes">
       <div class="notes__header">
         <h1>Folders</h1>
