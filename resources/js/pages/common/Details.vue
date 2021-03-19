@@ -4,7 +4,7 @@
   <div class="bg-gray-200">
     <div class="px-4 py-16">
       <div class="relative w-full md:max-w-2xl md:mx-auto text-center">
-        <h1 class="animate__animated animate__fadeInDown font-bold text-gray-700 text-xl sm:text-2xl md:text-5xl leading-tight mb-6">How Snotti works</h1>
+        <h1 class="animate__animated animate__fadeInDown font-bold text-gray-700 lg:text-5xl text-3xl md:text-5xl leading-tight mb-6">How Snotti works</h1>
         <p class="text-gray-600 md:text-xl md:px-18">
           <strong>I do not own any right in the apple logo, or used resources.</strong>
         </p>
@@ -16,7 +16,7 @@
     </div>
 
     <div>
-      <img src="images/mockup.png">
+      <img class="transform scale-150 md:scale-100" src="images/mockup.png">
     </div>
 
     <svg
@@ -33,12 +33,7 @@
 
   <p class="text-center p-4 text-gray-600 mt-10">
     Created by
-    <a class="border-b text-blue-400" href="https://adam-torok.netlify.app/" target="_blank">Adam Torok</a>. Inspired by dribble shot
-    <a
-      href="https://dribbble.com/shots/8807920-Quickpay-Hero-section/attachments/1015863"
-      target="_blank"
-      class="border-b text-blue-400"
-      >https://dribbble.com/vadimdrut</a>
+    <a class="border-b text-gray-400" href="https://adam-torok.netlify.app/" target="_blank">Adam Torok</a>. Inspired by Apple
   </p>
   </div>
 </div>

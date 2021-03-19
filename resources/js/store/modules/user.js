@@ -10,7 +10,6 @@ function getLocalUser() {
 }
 
 const user = getLocalUser();
-console.log(user);
 
 const state = () => ({
    currentUser: user,

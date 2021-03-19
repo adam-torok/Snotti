@@ -2120,6 +2120,32 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'app-header',
   computed: {
@@ -2127,7 +2153,30 @@ __webpack_require__.r(__webpack_exports__);
       return this.$store.state.user.currentUser; // Use a getter instead of this.
     }
   },
+  created: function created() {
+    document.addEventListener('click', this.documentClick);
+  },
+  destroyed: function destroyed() {
+    document.removeEventListener('click', this.documentClick);
+  },
   methods: {
+    documentClick: function documentClick(e) {
+      if (this.$refs.dropdownMenu) {
+        var el = this.$refs.dropdownMenu;
+        var target = e.target;
+
+        if (el !== target && !el.contains(target) || target.tagName == 'NAV' || target.tagName == 'A') {
+          this.menuOpen = false;
+        }
+      } else {
+        var _el = this.$refs.outerDropdownMenu;
+        var _target = e.target;
+
+        if (_el !== _target && !_el.contains(_target) || _target.tagName == 'NAV' || _target.tagName == 'A') {
+          this.outerMenuOpen = false;
+        }
+      }
+    },
     logout: function logout() {
       this.$store.dispatch('user/logout');
       this.$router.push('/login');
@@ -2146,7 +2195,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      menuOpen: false
+      menuOpen: false,
+      outerMenuOpen: false
     };
   }
 });
@@ -2453,11 +2503,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({});
 
 /***/ }),
@@ -2473,11 +2518,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-//
-//
-//
-//
-//
 //
 //
 //
@@ -2591,7 +2631,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({});
 
 /***/ }),
@@ -2632,9 +2671,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-//
-//
-//
 //
 //
 //
@@ -2772,13 +2808,12 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _helpers_svg_sprite_loader__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./helpers/svg-sprite-loader */ "./resources/js/helpers/svg-sprite-loader.js");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
-/* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm.js");
-/* harmony import */ var _routes__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./routes */ "./resources/js/routes.js");
-/* harmony import */ var _helpers_init__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./helpers/init */ "./resources/js/helpers/init.js");
-/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./store */ "./resources/js/store/index.js");
-/* harmony import */ var _Main__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Main */ "./resources/js/Main.vue");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
+/* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm.js");
+/* harmony import */ var _routes__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./routes */ "./resources/js/routes.js");
+/* harmony import */ var _helpers_init__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./helpers/init */ "./resources/js/helpers/init.js");
+/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./store */ "./resources/js/store/index.js");
+/* harmony import */ var _Main__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Main */ "./resources/js/Main.vue");
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 
@@ -2787,24 +2822,18 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 
 
-
-vue__WEBPACK_IMPORTED_MODULE_5__.default.use(vue_router__WEBPACK_IMPORTED_MODULE_6__.default);
-var __svg__ = {
-  path: '../icons/*.svg',
-  name: '../icons/[hash].sprite.svg'
-};
-(0,_helpers_svg_sprite_loader__WEBPACK_IMPORTED_MODULE_0__.default)(__svg__.filename);
-var router = new vue_router__WEBPACK_IMPORTED_MODULE_6__.default({
-  routes: _routes__WEBPACK_IMPORTED_MODULE_1__.routes,
+vue__WEBPACK_IMPORTED_MODULE_4__.default.use(vue_router__WEBPACK_IMPORTED_MODULE_5__.default);
+var router = new vue_router__WEBPACK_IMPORTED_MODULE_5__.default({
+  routes: _routes__WEBPACK_IMPORTED_MODULE_0__.routes,
   mode: 'history'
 });
-(0,_helpers_init__WEBPACK_IMPORTED_MODULE_2__.initialize)(_store__WEBPACK_IMPORTED_MODULE_3__.default, router);
-var app = new vue__WEBPACK_IMPORTED_MODULE_5__.default({
+(0,_helpers_init__WEBPACK_IMPORTED_MODULE_1__.initialize)(_store__WEBPACK_IMPORTED_MODULE_2__.default, router);
+var app = new vue__WEBPACK_IMPORTED_MODULE_4__.default({
   router: router,
-  store: _store__WEBPACK_IMPORTED_MODULE_3__.default,
+  store: _store__WEBPACK_IMPORTED_MODULE_2__.default,
   el: '#app',
   components: {
-    MainApp: _Main__WEBPACK_IMPORTED_MODULE_4__.default
+    MainApp: _Main__WEBPACK_IMPORTED_MODULE_3__.default
   }
 });
 
@@ -2845,7 +2874,6 @@ function initialize(store, router) {
     });
     var currentUser = store.state.user.currentUser;
     ;
-    console.log(currentUser);
 
     if (requiresAuth && !currentUser) {
       next('/login');
@@ -2867,102 +2895,7 @@ function initialize(store, router) {
   if (store.getters.currentUser) {
     setAuthorization(store.state.user.currentUser.token);
   }
-
-  console.log('hello');
 }
-
-/***/ }),
-
-/***/ "./resources/js/helpers/svg-sprite-loader.js":
-/*!***************************************************!*\
-  !*** ./resources/js/helpers/svg-sprite-loader.js ***!
-  \***************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-
-
-var isSvg = document.createElementNS && document.createElementNS('http://www.w3.org/2000/svg', 'svg').createSVGRect;
-var localStorage = 'localStorage' in window && window['localStorage'] !== null ? window.localStorage : false;
-
-function svgSpriteInjector(source, opts) {
-  var file;
-  opts = opts || {};
-
-  if (source instanceof Node) {
-    file = source.getAttribute('data-svg-sprite');
-    opts.revision = source.getAttribute('data-svg-sprite-revision') || opts.revision;
-  } else if (typeof source === 'string') {
-    file = source;
-  }
-
-  if (isSvg) {
-    if (file) {
-      injector(file, opts);
-    } else {
-      console.error('svg-sprite-injector: undefined sprite filename!');
-    }
-  } else {
-    console.error('svg-sprite-injector require ie9 or greater!');
-  }
-}
-
-;
-
-function injector(filepath, opts) {
-  var name = 'injectedSVGSprite' + filepath,
-      revision = opts.revision,
-      request;
-  console.log(name); // localStorage cache
-
-  if (revision !== undefined && localStorage && localStorage[name + 'Rev'] == revision) {
-    return injectOnLoad(localStorage[name]);
-  } // Async load
-
-
-  request = new XMLHttpRequest();
-  request.open('GET', filepath, true);
-
-  request.onreadystatechange = function (e) {
-    var data;
-
-    if (request.readyState === 4 && request.status >= 200 && request.status < 400) {
-      injectOnLoad(data = request.responseText);
-
-      if (revision !== undefined && localStorage) {
-        localStorage[name] = data;
-        localStorage[name + 'Rev'] = revision;
-      }
-    }
-  };
-
-  request.send();
-}
-
-function injectOnLoad(data) {
-  if (data) {
-    if (document.body) {
-      injectData(data);
-    } else {
-      document.addEventListener('DOMContentLoaded', injectData.bind(null, data));
-    }
-  }
-}
-
-function injectData(data) {
-  var body = document.body;
-  body.insertAdjacentHTML('afterbegin', data);
-
-  if (body.firstChild.tagName === 'svg') {
-    body.firstChild.style.display = 'none';
-  }
-}
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (svgSpriteInjector);
 
 /***/ }),
 
@@ -3112,7 +3045,6 @@ function getLocalUser() {
 }
 
 var user = getLocalUser();
-console.log(user);
 
 var state = function state() {
   return {
@@ -3316,7 +3248,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.naver[data-v-6dde423b]{\n    z-index: 9;\n}\n.dropdown-menu[data-v-6dde423b]{\n    background: white;\n    position: absolute;\n    width: 200px;\n    right: 0;\n    top: 3rem;\n    justify-content: center;\n    align-items: center;\n    transform-origin: top;\n    transition: all .2s ease-in-out;\n}\n.dropdpown__inner[data-v-6dde423b]{\n    display: flex;\n    align-content: center;\n    align-items: center;\n    transition: all .2s ease-in-out;\n    justify-content: center;\n    flex-direction: column;\n    padding:10px;\n}\n.slide-enter[data-v-6dde423b], .slide-leave-to[data-v-6dde423b]{\n    transform: scaleY(0);\n}\n.rotated[data-v-6dde423b]{\n    transform: rotate(180deg)!important;\n    transition: all .2s ease-in-out;\n}\n.fa-chevron-circle-down[data-v-6dde423b]{\n    transform: rotate(0deg);\n    transition: all .2s ease-in-out;\n}\n.router-link-active[data-v-6dde423b]{\n  font-weight: bold;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.slide-fade-enter-active[data-v-6dde423b] {\n  transition: all .3s ease;\n}\n.slide-fade-leave-active[data-v-6dde423b] {\n  transition: all .3s cubic-bezier(1.0, 0.5, 0.8, 1.0);\n}\n.slide-fade-enter[data-v-6dde423b], .slide-fade-leave-to[data-v-6dde423b]\n/* .slide-fade-leave-active below version 2.1.8 */ {\n  transform: translateX(10px);\n  opacity: 0;\n}\n.naver[data-v-6dde423b]{\n    z-index: 9;\n}\n.dropdown-menu[data-v-6dde423b]{\n    background: white;\n    position: absolute;\n    width: 200px;\n    right: 0;\n    top: 3rem;\n    justify-content: center;\n    align-items: center;\n    transform-origin: top;\n    transition: all .2s ease-in-out;\n}\n.dropdpown__inner[data-v-6dde423b]{\n    display: flex;\n    align-content: center;\n    align-items: center;\n    transition: all .2s ease-in-out;\n    justify-content: center;\n    flex-direction: column;\n    padding:10px;\n}\n.slide-enter[data-v-6dde423b], .slide-leave-to[data-v-6dde423b]{\n    transform: scaleY(0);\n}\n.rotated[data-v-6dde423b]{\n    transform: rotate(180deg)!important;\n    transition: all .2s ease-in-out;\n}\n.fa-chevron-circle-down[data-v-6dde423b]{\n    transform: rotate(0deg);\n    transition: all .2s ease-in-out;\n}\n.router-link-active[data-v-6dde423b]{\n  font-weight: bold;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -57793,7 +57725,7 @@ var render = function() {
       "div",
       {
         staticClass:
-          "w-full md:max-w-6xl md:mx-auto md:flex md:items-center md:justify-between"
+          "w-full flex items-center content-center justify-between\t md:max-w-6xl md:mx-auto md:flex md:items-center md:justify-between"
       },
       [
         _c(
@@ -57813,76 +57745,122 @@ var render = function() {
           1
         ),
         _vm._v(" "),
-        _c("div", [
-          _c(
-            "div",
-            [
-              _c(
-                "router-link",
-                {
-                  staticClass:
-                    "flex justify-center md:inline-block py-1 md:py-4 text-gray-600 mr-6",
-                  attrs: { to: "/details" }
-                },
-                [_vm._v("How it Works")]
-              ),
-              _vm._v(" "),
-              _c(
-                "router-link",
-                {
-                  staticClass:
-                    "flex justify-center md:inline-block py-1 md:py-4 text-gray-500 hover:text-gray-600 mr-6",
-                  attrs: { to: "/about" }
-                },
-                [_vm._v("About the project")]
-              )
-            ],
-            1
-          )
-        ]),
-        _vm._v(" "),
-        _c("div", [
-          _vm.currentUser
-            ? _c(
-                "div",
-                [
-                  _c(
-                    "router-link",
-                    {
-                      staticClass:
-                        "inline-block py-1 md:py-4 text-gray-600 mr-6 font-bold",
-                      attrs: { to: "/folders" }
-                    },
-                    [_c("i", { staticClass: "fas fa-lg fa-folder-open" })]
-                  )
-                ],
-                1
-              )
-            : _vm._e()
-        ]),
-        _vm._v(" "),
         !_vm.currentUser
           ? _c(
               "div",
+              { ref: "outerDropdownMenu" },
               [
                 _c(
-                  "router-link",
+                  "button",
                   {
                     staticClass:
-                      "flex justify-center md:inline-block py-1 md:py-4 text-gray-500 hover:text-gray-600 mr-6",
-                    attrs: { to: "/login" }
+                      "inline-flex justify-center w-full rounded-md border px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none",
+                    attrs: {
+                      type: "button",
+                      id: "options-menu",
+                      "aria-expanded": "true",
+                      "aria-haspopup": "true"
+                    },
+                    on: {
+                      click: function($event) {
+                        _vm.outerMenuOpen = !_vm.outerMenuOpen
+                      }
+                    }
                   },
-                  [_vm._v("Login")]
+                  [
+                    _vm._v("\n            Menu\n            "),
+                    _c(
+                      "svg",
+                      {
+                        staticClass: "-mr-1 ml-2 h-5 w-5",
+                        attrs: {
+                          xmlns: "http://www.w3.org/2000/svg",
+                          viewBox: "0 0 20 20",
+                          fill: "currentColor",
+                          "aria-hidden": "true"
+                        }
+                      },
+                      [
+                        _c("path", {
+                          attrs: {
+                            "fill-rule": "evenodd",
+                            d:
+                              "M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z",
+                            "clip-rule": "evenodd"
+                          }
+                        })
+                      ]
+                    )
+                  ]
                 ),
                 _vm._v(" "),
                 _c(
-                  "router-link",
-                  {
-                    staticClass:
-                      "flex justify-center md:inline-block py-2 px-4 text-gray-700 bg-white hover:bg-gray-100 rounded-lg",
-                    attrs: { to: "/register" }
-                  },
-                  [_vm._v("Register for free")]
+                  "transition",
+                  { attrs: { mode: "in-out", name: "slide-fade" } },
+                  [
+                    _vm.outerMenuOpen
+                      ? _c(
+                          "div",
+                          {
+                            staticClass:
+                              "z-50 origin-top-right absolute right-10 mt-2 w-56 rounded-md bg-white focus:outline-none",
+                            attrs: {
+                              role: "menu",
+                              "aria-orientation": "vertical",
+                              "aria-labelledby": "options-menu"
+                            }
+                          },
+                          [
+                            _c(
+                              "div",
+                              { staticClass: "py-1", attrs: { role: "none" } },
+                              [
+                                _c(
+                                  "router-link",
+                                  {
+                                    staticClass:
+                                      "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900",
+                                    attrs: { to: "/details" }
+                                  },
+                                  [_vm._v("How it Works")]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "router-link",
+                                  {
+                                    staticClass:
+                                      "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900",
+                                    attrs: { to: "/about" }
+                                  },
+                                  [_vm._v("About the project")]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "router-link",
+                                  {
+                                    staticClass:
+                                      "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900",
+                                    attrs: { to: "/login" }
+                                  },
+                                  [_vm._v("Login")]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "router-link",
+                                  {
+                                    staticClass:
+                                      "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900",
+                                    attrs: { to: "/register" }
+                                  },
+                                  [_vm._v("Register for free")]
+                                )
+                              ],
+                              1
+                            )
+                          ]
+                        )
+                      : _vm._e()
+                  ]
                 )
               ],
               1
@@ -57890,16 +57868,150 @@ var render = function() {
           : _vm._e(),
         _vm._v(" "),
         _vm.currentUser
-          ? _c("div", [
-              _vm._v("\n       " + _vm._s(_vm.currentUser.name) + "\n      "),
+          ? _c(
+              "div",
+              [
+                _c(
+                  "router-link",
+                  {
+                    staticClass:
+                      "inline-block py-1 md:py-4 text-gray-600 mr-6 font-bold",
+                    attrs: { to: "/folders" }
+                  },
+                  [_vm._v("Folders")]
+                )
+              ],
+              1
+            )
+          : _vm._e(),
+        _vm._v(" "),
+        _vm.currentUser
+          ? _c("div", { ref: "dropdownMenu" }, [
               _c(
-                "button",
+                "div",
                 {
-                  staticClass:
-                    "flex justify-center md:inline-block py-1 md:py-4 text-gray-500 hover:text-gray-600 mr-6",
-                  on: { click: _vm.logout }
+                  staticClass: "relative inline-block text-left",
+                  on: {
+                    click: function($event) {
+                      _vm.menuOpen = !_vm.menuOpen
+                    }
+                  }
                 },
-                [_vm._v("Logout")]
+                [
+                  _c("div", [
+                    _c(
+                      "button",
+                      {
+                        staticClass:
+                          "inline-flex justify-center w-full rounded-md border px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none",
+                        attrs: {
+                          type: "button",
+                          id: "options-menu",
+                          "aria-expanded": "true",
+                          "aria-haspopup": "true"
+                        }
+                      },
+                      [
+                        _vm._v("\n            Options\n            "),
+                        _c(
+                          "svg",
+                          {
+                            staticClass: "-mr-1 ml-2 h-5 w-5",
+                            attrs: {
+                              xmlns: "http://www.w3.org/2000/svg",
+                              viewBox: "0 0 20 20",
+                              fill: "currentColor",
+                              "aria-hidden": "true"
+                            }
+                          },
+                          [
+                            _c("path", {
+                              attrs: {
+                                "fill-rule": "evenodd",
+                                d:
+                                  "M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z",
+                                "clip-rule": "evenodd"
+                              }
+                            })
+                          ]
+                        )
+                      ]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "transition",
+                    { attrs: { mode: "in-out", name: "slide-fade" } },
+                    [
+                      _vm.menuOpen
+                        ? _c(
+                            "div",
+                            {
+                              staticClass:
+                                "z-50 origin-top-right absolute right-0 mt-2 w-56 rounded-md bg-white focus:outline-none",
+                              attrs: {
+                                role: "menu",
+                                "aria-orientation": "vertical",
+                                "aria-labelledby": "options-menu"
+                              }
+                            },
+                            [
+                              _c(
+                                "div",
+                                {
+                                  staticClass: "py-1",
+                                  attrs: { role: "none" }
+                                },
+                                [
+                                  _c(
+                                    "a",
+                                    {
+                                      staticClass:
+                                        "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900",
+                                      attrs: { href: "#", role: "menuitem" }
+                                    },
+                                    [_vm._v("Account settings")]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "a",
+                                    {
+                                      staticClass:
+                                        "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900",
+                                      attrs: { href: "#", role: "menuitem" }
+                                    },
+                                    [_vm._v("Support")]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "a",
+                                    {
+                                      staticClass:
+                                        "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900",
+                                      attrs: { href: "#", role: "menuitem" }
+                                    },
+                                    [_vm._v("License")]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "a",
+                                    {
+                                      staticClass:
+                                        "cursor-pointer w-full block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900",
+                                      attrs: { href: "#", role: "menuitem" },
+                                      on: { click: _vm.logout }
+                                    },
+                                    [_vm._v("Logout")]
+                                  )
+                                ]
+                              )
+                            ]
+                          )
+                        : _vm._e()
+                    ]
+                  )
+                ],
+                1
               )
             ])
           : _vm._e()
@@ -57941,14 +58053,14 @@ var render = function() {
         "div",
         {
           staticClass:
-            "flex flex-col overflow-hidden bg-white rounded-md shadow-lg max md:flex-row md:flex-1 lg:max-w-screen-md"
+            "animate__animated animate__fadeIn flex flex-col overflow-hidden bg-white rounded-md max md:flex-row md:flex-1 lg:max-w-screen-md"
         },
         [
           _c(
             "div",
             {
               staticClass:
-                "p-4 py-6 text-white bg-gray-500 md:w-80 md:flex-shrink-0 md:flex md:flex-col md:items-center md:justify-evenly"
+                " p-4 py-6 hidden text-white bg-gray-700 md:w-80 md:flex-shrink-0 md:flex md:flex-col md:items-center md:justify-evenly"
             },
             [
               _vm._m(0),
@@ -57964,18 +58076,16 @@ var render = function() {
                 [
                   _c("span", [_vm._v("Don't have an account?")]),
                   _vm._v(" "),
-                  _c(
-                    "router-link",
-                    { staticClass: "underline", attrs: { to: "/register" } },
-                    [_vm._v("Get Started!")]
-                  )
+                  _c("router-link", { attrs: { to: "/register" } }, [
+                    _vm._v("Get Started!")
+                  ])
                 ],
                 1
               )
             ]
           ),
           _vm._v(" "),
-          _c("div", { staticClass: "p-5 bg-white md:flex-1" }, [
+          _c("div", { staticClass: "px-5 py-2 bg-white md:flex-1" }, [
             _c(
               "h3",
               { staticClass: "my-4 text-2xl font-semibold text-gray-700" },
@@ -58071,7 +58181,7 @@ var render = function() {
                     "button",
                     {
                       staticClass:
-                        "w-full px-4 py-2 text-lg font-semibold text-white transition-colors duration-300 bg-gray-500 rounded-md shadow hover:bg-gray-600 focus:outline-none focus:ring-gray-200 focus:ring-4",
+                        "w-full px-4 py-2 text-lg font-semibold text-white transition-colors duration-300 bg-gray-700 rounded-md hover:bg-gray-900",
                       attrs: { type: "submit" }
                     },
                     [
@@ -58115,7 +58225,14 @@ var staticRenderFns = [
         staticClass:
           "font-bold text-center text-white text-xl sm:text-2xl md:text-5xl leading-tight mb-6"
       },
-      [_c("a", { attrs: { href: "#" } }, [_vm._v("Snotti.")])]
+      [
+        _c("a", { attrs: { href: "#" } }, [
+          _c("i", {
+            staticClass: "mt-4 text-6xl fab text-white fa-xl fa-apple"
+          }),
+          _vm._v(" Snotti.")
+        ])
+      ]
     )
   },
   function() {
@@ -58181,9 +58298,11 @@ var staticRenderFns = [
         [
           _c("span", { staticClass: "h-px bg-gray-400 w-14" }),
           _vm._v(" "),
-          _c("span", { staticClass: "font-normal text-gray-500" }, [
-            _vm._v("It is Completely free. And will be free.")
-          ]),
+          _c(
+            "small",
+            { staticClass: "font-normal text-center text-gray-500" },
+            [_c("strong", [_vm._v("It is Completely free. And will be free.")])]
+          ),
           _vm._v(" "),
           _c("span", { staticClass: "h-px bg-gray-400 w-14" })
         ]
@@ -58224,14 +58343,14 @@ var render = function() {
         "div",
         {
           staticClass:
-            "flex flex-col overflow-hidden bg-white rounded-md shadow-lg max md:flex-row md:flex-1 lg:max-w-screen-md"
+            "animate__animated animate__fadeIn flex flex-col overflow-hidden bg-white rounded-md max md:flex-row md:flex-1 lg:max-w-screen-md"
         },
         [
           _c(
             "div",
             {
               staticClass:
-                "p-4 py-6 text-white bg-gray-500 md:w-80 md:flex-shrink-0 md:flex md:flex-col md:items-center md:justify-evenly"
+                "p-4 py-6 hidden text-white bg-gray-700 md:w-80 md:flex-shrink-0 md:flex md:flex-col md:items-center md:justify-evenly"
             },
             [
               _vm._m(0),
@@ -58247,18 +58366,16 @@ var render = function() {
                 [
                   _c("span", [_vm._v("Already have an account?")]),
                   _vm._v(" "),
-                  _c(
-                    "router-link",
-                    { staticClass: "underline", attrs: { to: "/login" } },
-                    [_vm._v("Login")]
-                  )
+                  _c("router-link", { attrs: { to: "/login" } }, [
+                    _vm._v("Login")
+                  ])
                 ],
                 1
               )
             ]
           ),
           _vm._v(" "),
-          _c("div", { staticClass: "p-5 bg-white md:flex-1" }, [
+          _c("div", { staticClass: "px-5 py-2 bg-white md:flex-1" }, [
             _c(
               "h3",
               { staticClass: "my-4 text-2xl font-semibold text-gray-700" },
@@ -58480,7 +58597,7 @@ var staticRenderFns = [
         "button",
         {
           staticClass:
-            "w-full px-4 py-2 text-lg font-semibold text-white transition-colors duration-300 bg-gray-500 rounded-md shadow hover:bg-gray-600 focus:outline-none focus:ring-gray-200 focus:ring-4",
+            "w-full px-4 py-2 text-lg font-semibold text-white transition-colors duration-300 bg-gray-700 rounded-md hover:bg-gray-900",
           attrs: { type: "submit" }
         },
         [_vm._v("\n                Register\n              ")]
@@ -58498,8 +58615,8 @@ var staticRenderFns = [
         [
           _c("span", { staticClass: "h-px bg-gray-400 w-14" }),
           _vm._v(" "),
-          _c("span", { staticClass: "font-normal text-gray-500" }, [
-            _vm._v("It is Completely free. And will be free.")
+          _c("small", { staticClass: "font-normal text-gray-500" }, [
+            _c("strong", [_vm._v("It is Completely free. And will be free.")])
           ]),
           _vm._v(" "),
           _c("span", { staticClass: "h-px bg-gray-400 w-14" })
@@ -58640,19 +58757,7 @@ var staticRenderFns = [
         },
         [_vm._v("Adam Torok")]
       ),
-      _vm._v(". Inspired by dribble shot\n    "),
-      _c(
-        "a",
-        {
-          staticClass: "border-b text-gray-400",
-          attrs: {
-            href:
-              "https://dribbble.com/shots/8807920-Quickpay-Hero-section/attachments/1015863",
-            target: "_blank"
-          }
-        },
-        [_vm._v("https://dribbble.com/vadimdrut")]
-      )
+      _vm._v(". Inspired by Apple\n  ")
     ])
   }
 ]
@@ -58728,7 +58833,7 @@ var staticRenderFns = [
             "h1",
             {
               staticClass:
-                "animate__animated animate__fadeInDown font-bold text-gray-700 text-xl sm:text-2xl md:text-5xl leading-tight mb-6"
+                "animate__animated animate__fadeInDown font-bold text-gray-700 lg:text-5xl text-3xl md:text-5xl leading-tight mb-6"
             },
             [_vm._v("How Snotti works")]
           ),
@@ -58766,7 +58871,12 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", [_c("img", { attrs: { src: "images/mockup.png" } })])
+    return _c("div", [
+      _c("img", {
+        staticClass: "transform scale-150 md:scale-100",
+        attrs: { src: "images/mockup.png" }
+      })
+    ])
   },
   function() {
     var _vm = this
@@ -58777,24 +58887,12 @@ var staticRenderFns = [
       _c(
         "a",
         {
-          staticClass: "border-b text-blue-400",
+          staticClass: "border-b text-gray-400",
           attrs: { href: "https://adam-torok.netlify.app/", target: "_blank" }
         },
         [_vm._v("Adam Torok")]
       ),
-      _vm._v(". Inspired by dribble shot\n    "),
-      _c(
-        "a",
-        {
-          staticClass: "border-b text-blue-400",
-          attrs: {
-            href:
-              "https://dribbble.com/shots/8807920-Quickpay-Hero-section/attachments/1015863",
-            target: "_blank"
-          }
-        },
-        [_vm._v("https://dribbble.com/vadimdrut")]
-      )
+      _vm._v(". Inspired by Apple\n  ")
     ])
   }
 ]
@@ -58853,20 +58951,23 @@ var render = function() {
               "h1",
               {
                 staticClass:
-                  "md:max-w-2xl font-bold text-gray-700 text-xl sm:text-2xl md:text-5xl leading-tight mb-6 "
+                  "px-8 md:max-w-2xl font-bold text-gray-700 text-center lg:text-5xl text-3xl md:text-5xl leading-tight mb-6"
+              },
+              [_vm._v("\n      Snotti. - Just another note taking app.")]
+            ),
+            _vm._v(" "),
+            _c(
+              "p",
+              {
+                staticClass:
+                  "px-8 text-gray-600 text-center md:text-xl md:px-18"
               },
               [
                 _vm._v(
-                  "Snotti - a simple note taking app inspired by Apple Notes"
+                  "\n          I do not own any right in the apple logo, or used resources.\n        "
                 )
               ]
             ),
-            _vm._v(" "),
-            _c("p", { staticClass: "text-gray-600 md:text-xl md:px-18" }, [
-              _vm._v(
-                "\n          I do not own any right in the apple logo, or used resources.\n        "
-              )
-            ]),
             _vm._v(" "),
             _c("br"),
             _vm._v(" "),
@@ -58875,6 +58976,7 @@ var render = function() {
               {
                 staticClass: "mt-5",
                 attrs: {
+                  playsinline: "",
                   width: "70%",
                   height: "240",
                   autoplay: "true",
@@ -58901,7 +59003,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "px-4 py-16" }, [
+    return _c("div", { staticClass: "px-4 py-8 md:py-16" }, [
       _c(
         "div",
         { staticClass: "relative w-full md:max-w-2xl md:mx-auto text-center" },
@@ -58910,11 +59012,11 @@ var staticRenderFns = [
             "h1",
             {
               staticClass:
-                "animate__animated animate__fadeInDown font-bold text-gray-700 text-xl sm:text-2xl md:text-5xl leading-tight mb-6"
+                "animate__animated animate__fadeInDown font-bold text-gray-700 lg:text-5xl text-3xl md:text-5xl leading-tight mb-6"
             },
             [
               _vm._v(
-                "Snotti - a simple note taking app inspired by Apple Notes"
+                "\n          Snotti - a simple note taking app inspired by Apple Notes"
               )
             ]
           ),
@@ -58955,7 +59057,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("p", { staticClass: "text-center p-4 text-gray-600 mt-10" }, [
-      _vm._v("\n    Created by\n    "),
+      _vm._v("\n    Created by\n       "),
       _c(
         "a",
         {
@@ -58964,19 +59066,7 @@ var staticRenderFns = [
         },
         [_vm._v("Adam Torok")]
       ),
-      _vm._v(". Inspired by dribble shot\n    "),
-      _c(
-        "a",
-        {
-          staticClass: "border-b text-gray-400",
-          attrs: {
-            href:
-              "https://dribbble.com/shots/8807920-Quickpay-Hero-section/attachments/1015863",
-            target: "_blank"
-          }
-        },
-        [_vm._v("https://dribbble.com/vadimdrut")]
-      )
+      _vm._v(". Inspired by Apple\n  ")
     ])
   }
 ]
@@ -59035,19 +59125,6 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "flex flex-col bg-gray-200" }, [
-    _c(
-      "div",
-      { staticClass: "flex justify-end p-2" },
-      [
-        _c(
-          "router-link",
-          { staticClass: "icon m-2", attrs: { to: "/notes" } },
-          [_vm._v("Edit")]
-        )
-      ],
-      1
-    ),
-    _vm._v(" "),
     _c("div", { staticClass: "notes" }, [
       _vm._m(0),
       _vm._v(" "),

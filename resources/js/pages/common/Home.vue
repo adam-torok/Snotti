@@ -2,9 +2,11 @@
 <div class="font-sans bg-white flex flex-col min-h-screen w-full">
   <div>
   <div class="bg-gray-200">
-    <div class="px-4 py-16">
+    <div class="px-4 py-8 md:py-16">
       <div class="relative w-full md:max-w-2xl md:mx-auto text-center">
-        <h1 class="animate__animated animate__fadeInDown font-bold text-gray-700 text-xl sm:text-2xl md:text-5xl leading-tight mb-6">Snotti - a simple note taking app inspired by Apple Notes</h1>
+        <h1 
+          class="animate__animated animate__fadeInDown font-bold text-gray-700 lg:text-5xl text-3xl md:text-5xl leading-tight mb-6">
+          Snotti - a simple note taking app inspired by Apple Notes</h1>
         <p class="text-gray-600 md:text-xl md:px-18">
           I do not own any right in the apple logo, or used resources.
         </p>
@@ -29,26 +31,23 @@
     </svg>
 
     <div class="video__container">
-      <h1 class="md:max-w-2xl font-bold text-gray-700 text-xl sm:text-2xl md:text-5xl leading-tight mb-6 ">Snotti - a simple note taking app inspired by Apple Notes</h1>
-        <p class="text-gray-600 md:text-xl md:px-18">
+      <h1 
+      class="px-8 md:max-w-2xl font-bold text-gray-700 text-center lg:text-5xl text-3xl md:text-5xl leading-tight mb-6">
+      Snotti. - Just another note taking app.</h1>
+        <p class="px-8 text-gray-600 text-center md:text-xl md:px-18">
           I do not own any right in the apple logo, or used resources.
         </p>
         <br>
-      <video class="mt-5" width="70%" height="240" autoplay=true muted>
-        <source src="videos/out-white.mp4" type="video/mp4">
-    </video>
+      <video playsinline class="mt-5" width="70%" height="240" autoplay=true muted>
+          <source src="videos/out-white.mp4" type="video/mp4">
+      </video>
     </div>
 
   </div>
 
   <p class="text-center p-4 text-gray-600 mt-10">
     Created by
-    <a class="border-b text-gray-400" href="https://adam-torok.netlify.app/" target="_blank">Adam Torok</a>. Inspired by dribble shot
-    <a
-      href="https://dribbble.com/shots/8807920-Quickpay-Hero-section/attachments/1015863"
-      target="_blank"
-      class="border-b text-gray-400"
-      >https://dribbble.com/vadimdrut</a>
+       <a class="border-b text-gray-400" href="https://adam-torok.netlify.app/" target="_blank">Adam Torok</a>. Inspired by Apple
   </p>
   </div>
 </div>
