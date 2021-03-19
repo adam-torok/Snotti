@@ -91,7 +91,6 @@ export default {
             this.$store.dispatch('user/login', this.$data.form)
                .then((res) => {
                   this.$store.commit("user/LOGIN_SUCCESS", res);
-                  console.log(res);
                   this.$router.push({ path: "/folders" });
                })
                .catch((error) => {

@@ -2059,9 +2059,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  mounted: function mounted() {
-    console.log(this.name);
-  },
+  mounted: function mounted() {},
   props: {
     name: {},
     size: {
@@ -2131,7 +2129,6 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     logout: function logout() {
-      console.log(this.$store);
       this.$store.dispatch('user/logout');
       this.$router.push('/login');
     },
@@ -2259,8 +2256,6 @@ __webpack_require__.r(__webpack_exports__);
       setTimeout(function () {
         _this.$store.dispatch('user/login', _this.$data.form).then(function (res) {
           _this.$store.commit("user/LOGIN_SUCCESS", res);
-
-          console.log(res);
 
           _this.$router.push({
             path: "/folders"
@@ -2872,6 +2867,8 @@ function initialize(store, router) {
   if (store.getters.currentUser) {
     setAuthorization(store.state.user.currentUser.token);
   }
+
+  console.log('hello');
 }
 
 /***/ }),
