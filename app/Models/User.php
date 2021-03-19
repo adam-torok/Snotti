@@ -38,7 +38,12 @@ class User extends Authenticatable implements JWTSubject
         return [];
     }
 
-    public function folder()
+    public function notes()
+    {
+        return $this->hasManyThrough(Note::class, Folder::class);
+    }
+
+    public function folders()
     {
         return $this->hasMany(Folder::class);
     }
