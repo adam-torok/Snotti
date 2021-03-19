@@ -18,17 +18,19 @@
           class="single">
           <i class="icon fa-lg far fa-folder"></i>
           <h4>{{folder.name}}</h4>
-          <h5 class="num">2</h5>
+          <h5 @click.prevent="deleteFolder(folder.id)" class="num"><i class="fas fa-minus-circle"></i></h5>
         </router-link>
       </div>
-      <div class="flex m-auto justify-center items-center flex-col" v-else>
+      <div v-else class="flex m-auto justify-center items-center flex-col">
           <h4 class="text-center">It looks empty...</h4>
-          <a href="#"><i class="text-center icon text-6xl fas fa-folder-plus"></i></a>
-        </div>
+      </div>
+      <router-link to="/folder/create">
+        <i class="text-center icon text-6xl fas fa-folder-plus"></i>
+      </router-link>
     </div>
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" class="fill-current bg-gray-200 text-white  md:block"><path fill-opacity="1" d="M0,64L120,85.3C240,107,480,149,720,149.3C960,149,1200,107,1320,85.3L1440,64L1440,320L1320,320C1200,320,960,320,720,320C480,320,240,320,120,320L0,320Z"></path></svg>
     <div class="notes__footer">
-      <router-link to="/note/create"><i class="icon fa-lg fas fa-folder-plus"></i></router-link>
+      <router-link to="/folder/create"><i class="icon fa-lg fas fa-folder-plus"></i></router-link>
       <router-link to="/note/create"><i class="icon fa-lg far fa-edit"></i></router-link>
     </div>
   </div>
@@ -41,13 +43,21 @@ export default {
       folders : []
     }
   },
+  methods:{
+    deleteFolder(id){
+      alert('deleting ' + id + ' folder');
+      console.log('deleting this folder');
+      // api call
+      // do it in store
+    }
+  },
   mounted(){
     axios.get('api/folders',{
       headers: {
         Authorization: 'Bearer ' + this.$store.state.user.currentUser.token //the token is a variable which holds the token
       }
     }).then((res) =>{
-      this.folders = res.data;
+      this.folders = res.data; // Add it to the store
     })
   }
 }

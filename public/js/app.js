@@ -2656,7 +2656,37 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({});
+//
+//
+//
+//
+//
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  data: function data() {
+    return {
+      form: {
+        user_id: this.$store.state.user.currentUser.id,
+        name: ''
+      }
+    };
+  },
+  methods: {
+    createFolder: function createFolder() {
+      var _this = this;
+
+      axios.post('../api/folders/create', this.form, {
+        headers: {
+          Authorization: 'Bearer ' + this.$store.state.user.currentUser.token //the token is a variable which holds the token
+
+        }
+      }).then(function (res) {
+        _this.$router.push('/folders');
+
+        console.log('hi'); // Show a treat
+      });
+    }
+  }
+});
 
 /***/ }),
 
@@ -2707,11 +2737,20 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
       folders: []
     };
+  },
+  methods: {
+    deleteFolder: function deleteFolder(id) {
+      alert('deleting ' + id + ' folder');
+      console.log('deleting this folder'); // api call
+      // do it in store
+    }
   },
   mounted: function mounted() {
     var _this = this;
@@ -2722,7 +2761,7 @@ __webpack_require__.r(__webpack_exports__);
 
       }
     }).then(function (res) {
-      _this.folders = res.data;
+      _this.folders = res.data; // Add it to the store
     });
   }
 });
@@ -2959,10 +2998,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _pages_auth_Login_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./pages/auth/Login.vue */ "./resources/js/pages/auth/Login.vue");
 /* harmony import */ var _pages_auth_Register_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./pages/auth/Register.vue */ "./resources/js/pages/auth/Register.vue");
 /* harmony import */ var _pages_notes_Folders_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./pages/notes/Folders.vue */ "./resources/js/pages/notes/Folders.vue");
-/* harmony import */ var _pages_notes_Index_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./pages/notes/Index.vue */ "./resources/js/pages/notes/Index.vue");
-/* harmony import */ var _pages_notes_show_vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./pages/notes/show.vue */ "./resources/js/pages/notes/show.vue");
-/* harmony import */ var _pages_notes_edit_vue__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./pages/notes/edit.vue */ "./resources/js/pages/notes/edit.vue");
-/* harmony import */ var _pages_notes_Create_vue__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./pages/notes/Create.vue */ "./resources/js/pages/notes/Create.vue");
+/* harmony import */ var _pages_notes_Create_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./pages/notes/Create.vue */ "./resources/js/pages/notes/Create.vue");
+/* harmony import */ var _pages_notes_Index_vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./pages/notes/Index.vue */ "./resources/js/pages/notes/Index.vue");
+/* harmony import */ var _pages_notes_show_vue__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./pages/notes/show.vue */ "./resources/js/pages/notes/show.vue");
+/* harmony import */ var _pages_notes_edit_vue__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./pages/notes/edit.vue */ "./resources/js/pages/notes/edit.vue");
+
 
 
 
@@ -3010,9 +3050,15 @@ var routes = [{
     requiresAuth: true
   }
 }, {
+  path: '/folder/create',
+  component: _pages_notes_Create_vue__WEBPACK_IMPORTED_MODULE_6__.default,
+  meta: {
+    requiresAuth: true
+  }
+}, {
   path: '/folders/:id',
   name: 'folders',
-  component: _pages_notes_Index_vue__WEBPACK_IMPORTED_MODULE_6__.default,
+  component: _pages_notes_Index_vue__WEBPACK_IMPORTED_MODULE_7__.default,
   props: true,
   meta: {
     requiresAuth: true
@@ -3020,20 +3066,20 @@ var routes = [{
 }, {
   path: '/note/:id',
   name: 'note',
-  component: _pages_notes_show_vue__WEBPACK_IMPORTED_MODULE_7__.default,
+  component: _pages_notes_show_vue__WEBPACK_IMPORTED_MODULE_8__.default,
   props: true,
   meta: {
     requiresAuth: true
   }
 }, {
   path: '/note/create',
-  component: _pages_notes_Create_vue__WEBPACK_IMPORTED_MODULE_9__.default,
+  component: _pages_notes_Create_vue__WEBPACK_IMPORTED_MODULE_6__.default,
   meta: {
     requiresAuth: true
   }
 }, {
   path: '/note/:id/edit',
-  component: _pages_notes_edit_vue__WEBPACK_IMPORTED_MODULE_8__.default,
+  component: _pages_notes_edit_vue__WEBPACK_IMPORTED_MODULE_9__.default,
   meta: {
     requiresAuth: false
   }
@@ -59139,15 +59185,64 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "create" }, [
-    _c(
-      "div",
-      { staticClass: "create__header" },
-      [_c("router-link", [_c("h3", [_vm._v("Folders")])])],
-      1
-    )
+    _vm._m(0),
+    _vm._v(" "),
+    _c("div", { staticClass: "create__body" }, [
+      _c(
+        "form",
+        {
+          on: {
+            submit: function($event) {
+              $event.preventDefault()
+              return _vm.createFolder($event)
+            }
+          }
+        },
+        [
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.form.name,
+                expression: "form.name"
+              }
+            ],
+            attrs: {
+              placeholder: "Folder's name",
+              type: "text",
+              name: "name",
+              id: "name"
+            },
+            domProps: { value: _vm.form.name },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.form, "name", $event.target.value)
+              }
+            }
+          }),
+          _vm._v(" "),
+          _c("button", { attrs: { type: "submit" } }, [_vm._v("Create folder")])
+        ]
+      )
+    ])
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "create__header" }, [
+      _c("h1", [_vm._v("New Folder")]),
+      _vm._v(" "),
+      _c("small", [_vm._v("Folders will contain your notes...")])
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -59171,48 +59266,73 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "flex flex-col bg-gray-200" }, [
-    _c("div", { staticClass: "notes" }, [
-      _vm._m(0),
-      _vm._v(" "),
-      _vm._m(1),
-      _vm._v(" "),
-      _vm._m(2),
-      _vm._v(" "),
-      _vm.folders.length > 0
-        ? _c(
-            "div",
-            { staticClass: "notes__projects" },
-            _vm._l(_vm.folders, function(folder) {
-              return _c(
-                "router-link",
-                {
-                  key: folder.id,
-                  staticClass: "single",
-                  attrs: { to: { name: "folders", params: { id: folder.id } } }
-                },
-                [
-                  _c("i", { staticClass: "icon fa-lg far fa-folder" }),
-                  _vm._v(" "),
-                  _c("h4", [_vm._v(_vm._s(folder.name))]),
-                  _vm._v(" "),
-                  _c("h5", { staticClass: "num" }, [_vm._v("2")])
-                ]
-              )
-            }),
-            1
-          )
-        : _c(
-            "div",
-            { staticClass: "flex m-auto justify-center items-center flex-col" },
-            [
-              _c("h4", { staticClass: "text-center" }, [
-                _vm._v("It looks empty...")
-              ]),
-              _vm._v(" "),
-              _vm._m(3)
-            ]
-          )
-    ]),
+    _c(
+      "div",
+      { staticClass: "notes" },
+      [
+        _vm._m(0),
+        _vm._v(" "),
+        _vm._m(1),
+        _vm._v(" "),
+        _vm._m(2),
+        _vm._v(" "),
+        _vm.folders.length > 0
+          ? _c(
+              "div",
+              { staticClass: "notes__projects" },
+              _vm._l(_vm.folders, function(folder) {
+                return _c(
+                  "router-link",
+                  {
+                    key: folder.id,
+                    staticClass: "single",
+                    attrs: {
+                      to: { name: "folders", params: { id: folder.id } }
+                    }
+                  },
+                  [
+                    _c("i", { staticClass: "icon fa-lg far fa-folder" }),
+                    _vm._v(" "),
+                    _c("h4", [_vm._v(_vm._s(folder.name))]),
+                    _vm._v(" "),
+                    _c(
+                      "h5",
+                      {
+                        staticClass: "num",
+                        on: {
+                          click: function($event) {
+                            $event.preventDefault()
+                            return _vm.deleteFolder(folder.id)
+                          }
+                        }
+                      },
+                      [_c("i", { staticClass: "fas fa-minus-circle" })]
+                    )
+                  ]
+                )
+              }),
+              1
+            )
+          : _c(
+              "div",
+              {
+                staticClass: "flex m-auto justify-center items-center flex-col"
+              },
+              [
+                _c("h4", { staticClass: "text-center" }, [
+                  _vm._v("It looks empty...")
+                ])
+              ]
+            ),
+        _vm._v(" "),
+        _c("router-link", { attrs: { to: "/folder/create" } }, [
+          _c("i", {
+            staticClass: "text-center icon text-6xl fas fa-folder-plus"
+          })
+        ])
+      ],
+      1
+    ),
     _vm._v(" "),
     _c(
       "svg",
@@ -59235,7 +59355,7 @@ var render = function() {
       "div",
       { staticClass: "notes__footer" },
       [
-        _c("router-link", { attrs: { to: "/note/create" } }, [
+        _c("router-link", { attrs: { to: "/folder/create" } }, [
           _c("i", { staticClass: "icon fa-lg fas fa-folder-plus" })
         ]),
         _vm._v(" "),
@@ -59277,14 +59397,6 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "notes__header-sub" }, [
       _c("h1", [_vm._v("Folders")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("a", { attrs: { href: "#" } }, [
-      _c("i", { staticClass: "text-center icon text-6xl fas fa-folder-plus" })
     ])
   }
 ]
