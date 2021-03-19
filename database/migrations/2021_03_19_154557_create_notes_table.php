@@ -11,6 +11,7 @@ class CreateNotesTable extends Migration
         Schema::create('notes', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('folder_id');
+            $table->string('title');
             $table->mediumText('note');
             $table->timestamps();
         });

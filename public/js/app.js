@@ -2703,6 +2703,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -2712,7 +2716,12 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     var _this = this;
 
-    axios.get('api/folders', {}).then(function (res) {
+    axios.get('api/folders', {
+      headers: {
+        Authorization: 'Bearer ' + this.$store.state.user.currentUser.token //the token is a variable which holds the token
+
+      }
+    }).then(function (res) {
       _this.folders = res.data;
     });
   }
@@ -2761,6 +2770,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -2770,9 +2783,13 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     var _this = this;
 
-    console.log(this.id);
-    axios.get('../api/folders/', {}).then(function (res) {
-      console.log(res);
+    console.log(this.$route.params.id);
+    axios.get('../api/folders/' + this.$route.params.id, {
+      headers: {
+        Authorization: 'Bearer ' + this.$store.state.user.currentUser.token //the token is a variable which holds the token
+
+      }
+    }).then(function (res) {
       _this.notes = res.data;
     });
   }
@@ -3001,15 +3018,16 @@ var routes = [{
     requiresAuth: true
   }
 }, {
-  path: '/note/create',
-  component: _pages_notes_Create_vue__WEBPACK_IMPORTED_MODULE_9__.default,
+  path: '/note/:id',
+  name: 'note',
+  component: _pages_notes_show_vue__WEBPACK_IMPORTED_MODULE_7__.default,
+  props: true,
   meta: {
     requiresAuth: true
   }
 }, {
-  path: '/note/:id',
-  component: _pages_notes_show_vue__WEBPACK_IMPORTED_MODULE_7__.default,
-  props: true,
+  path: '/note/create',
+  component: _pages_notes_Create_vue__WEBPACK_IMPORTED_MODULE_9__.default,
   meta: {
     requiresAuth: true
   }
@@ -3228,7 +3246,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".notes__header-sub[data-v-76fe91ea] {\n  color: #111827;\n  font-weight: 700;\n  font-size: 1.2em;\n  margin-top: 1em;\n  margin-bottom: 0.5em;\n  line-height: 1.3333333;\n  margin-left: 0.5em;\n}\n.notes__projects[data-v-76fe91ea] {\n  background: white;\n  padding: 0px 0;\n  border-radius: 10px;\n}\n.notes__projects .single[data-v-76fe91ea] {\n  display: grid;\n  grid-template-columns: 90% 10%;\n  align-items: center;\n  padding: 8px;\n}\n.notes__projects .single .num[data-v-76fe91ea] {\n  color: #a7a7a7;\n  text-align: right;\n}\n.notes__projects .single a > h5[data-v-76fe91ea] {\n  color: #a7a7a7;\n}\n.notes__footer[data-v-76fe91ea] {\n  border-top: 1px solid #cacaca;\n  height: 45px;\n  position: absolute;\n  padding: 0px 15px;\n  align-content: center;\n  justify-content: center;\n  display: grid;\n  grid-template-columns: 95% 5%;\n  background: #F9F8FB;\n  bottom: 0;\n  width: 100%;\n}\n.notes__footer a[data-v-76fe91ea], .notes__footer span[data-v-76fe91ea] {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".notes__header-sub[data-v-76fe91ea] {\n  color: #111827;\n  font-weight: 700;\n  font-size: 1.2em;\n  margin-top: 1em;\n  margin-bottom: 0.5em;\n  line-height: 1.3333333;\n  margin-left: 0.5em;\n}\n.notes__projects[data-v-76fe91ea] {\n  background: white;\n  padding: 0px 0;\n  border-radius: 10px;\n}\n.notes__projects .single[data-v-76fe91ea] {\n  display: flex;\n  align-items: center;\n  padding: 8px;\n}\n.notes__projects .single .num[data-v-76fe91ea] {\n  color: #a7a7a7;\n  text-align: right;\n}\n.notes__projects .single a > h5[data-v-76fe91ea] {\n  color: #a7a7a7;\n}\n.notes__footer[data-v-76fe91ea] {\n  border-top: 1px solid #cacaca;\n  height: 45px;\n  position: absolute;\n  padding: 0px 15px;\n  align-content: center;\n  justify-content: center;\n  display: grid;\n  grid-template-columns: 95% 5%;\n  background: #F9F8FB;\n  bottom: 0;\n  width: 100%;\n}\n.notes__footer a[data-v-76fe91ea], .notes__footer span[data-v-76fe91ea] {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -59160,28 +59178,40 @@ var render = function() {
       _vm._v(" "),
       _vm._m(2),
       _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "notes__projects" },
-        _vm._l(_vm.folders, function(folder) {
-          return _c(
-            "router-link",
-            {
-              key: folder.id,
-              staticClass: "single",
-              attrs: { to: { name: "folders", params: { id: folder.id } } }
-            },
+      _vm.folders.length > 0
+        ? _c(
+            "div",
+            { staticClass: "notes__projects" },
+            _vm._l(_vm.folders, function(folder) {
+              return _c(
+                "router-link",
+                {
+                  key: folder.id,
+                  staticClass: "single",
+                  attrs: { to: { name: "folders", params: { id: folder.id } } }
+                },
+                [
+                  _c("i", { staticClass: "icon fa-lg far fa-folder" }),
+                  _vm._v(" "),
+                  _c("h4", [_vm._v(_vm._s(folder.name))]),
+                  _vm._v(" "),
+                  _c("h5", { staticClass: "num" }, [_vm._v("2")])
+                ]
+              )
+            }),
+            1
+          )
+        : _c(
+            "div",
+            { staticClass: "flex m-auto justify-center items-center flex-col" },
             [
-              _c("i", { staticClass: "icon fa-lg far fa-folder" }),
+              _c("h4", { staticClass: "text-center" }, [
+                _vm._v("It looks empty...")
+              ]),
               _vm._v(" "),
-              _c("h4", [_vm._v(_vm._s(folder.name))]),
-              _vm._v(" "),
-              _c("h5", { staticClass: "num" }, [_vm._v("2")])
+              _vm._m(3)
             ]
           )
-        }),
-        1
-      )
     ]),
     _vm._v(" "),
     _c(
@@ -59248,6 +59278,14 @@ var staticRenderFns = [
     return _c("div", { staticClass: "notes__header-sub" }, [
       _c("h1", [_vm._v("Folders")])
     ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("a", { attrs: { href: "#" } }, [
+      _c("i", { staticClass: "text-center icon text-6xl fas fa-folder-plus" })
+    ])
   }
 ]
 render._withStripped = true
@@ -59301,32 +59339,31 @@ var render = function() {
       _vm._v(" "),
       _vm._m(1),
       _vm._v(" "),
-      _c("div", { staticClass: "mt-4 notes__projects" }, [
-        _c(
-          "div",
-          { staticClass: "single" },
-          _vm._l(_vm.notes, function(note) {
-            return _c(
-              "router-link",
-              {
-                key: note.id,
-                staticClass: "flex flex-col",
-                attrs: { to: "note/1" }
-              },
-              [
+      _c(
+        "div",
+        { staticClass: "mt-4 notes__projects" },
+        _vm._l(_vm.notes, function(note) {
+          return _c(
+            "router-link",
+            {
+              key: note.id,
+              attrs: { to: { name: "note", params: { id: _vm.notes.id } } }
+            },
+            [
+              _c("div", { staticClass: "single flex flex-col" }, [
                 _c("h4", [
                   _c("strong", [
-                    _vm._v("Note 1.... " + _vm._s(note.created_at))
+                    _vm._v(_vm._s(note.title.substring(0, 15) + "..."))
                   ])
                 ]),
                 _vm._v(" "),
-                _c("h5", [_vm._v(_vm._s(note.note))])
-              ]
-            )
-          }),
-          1
-        )
-      ])
+                _c("h5", [_vm._v(_vm._s(note.note.substring(0, 15) + "..."))])
+              ])
+            ]
+          )
+        }),
+        1
+      )
     ]),
     _vm._v(" "),
     _c(

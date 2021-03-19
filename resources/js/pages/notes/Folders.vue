@@ -10,7 +10,7 @@
       <div class="notes__header-sub">
         <h1>Folders</h1>
       </div>
-      <div class="notes__projects">
+      <div v-if="folders.length > 0" class="notes__projects">
         <router-link 
           v-for="folder in folders" 
           :key="folder.id" 
@@ -21,6 +21,10 @@
           <h5 class="num">2</h5>
         </router-link>
       </div>
+      <div class="flex m-auto justify-center items-center flex-col" v-else>
+          <h4 class="text-center">It looks empty...</h4>
+          <a href="#"><i class="text-center icon text-6xl fas fa-folder-plus"></i></a>
+        </div>
     </div>
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" class="fill-current bg-gray-200 text-white  md:block"><path fill-opacity="1" d="M0,64L120,85.3C240,107,480,149,720,149.3C960,149,1200,107,1320,85.3L1440,64L1440,320L1320,320C1200,320,960,320,720,320C480,320,240,320,120,320L0,320Z"></path></svg>
     <div class="notes__footer">
@@ -39,7 +43,9 @@ export default {
   },
   mounted(){
     axios.get('api/folders',{
-
+      headers: {
+        Authorization: 'Bearer ' + this.$store.state.user.currentUser.token //the token is a variable which holds the token
+      }
     }).then((res) =>{
       this.folders = res.data;
     })

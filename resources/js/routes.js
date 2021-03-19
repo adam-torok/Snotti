@@ -46,6 +46,7 @@ export const routes = [
          requiresAuth : true,
       }
    },
+
    {  path : '/folders/:id',
       name: 'folders',
       component : Notes,
@@ -53,6 +54,14 @@ export const routes = [
       meta : {
          requiresAuth : true,
       }},
+         {  path : '/note/:id',
+      name : 'note',
+      component : Note  ,
+      props: true,
+      meta : {
+         requiresAuth : true,
+      }
+   },
  
    {  path : '/note/create',
       component : CreateNote,
@@ -60,13 +69,7 @@ export const routes = [
          requiresAuth : true,
       }
    },
-   {  path : '/note/:id',
-      component : Note,
-      props: true,
-      meta : {
-         requiresAuth : true,
-      }
-   },
+   
    {  path : '/note/:id/edit',
       component : EditNote,
       meta : {
