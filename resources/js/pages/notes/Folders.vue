@@ -11,9 +11,13 @@
         <h1>Folders</h1>
       </div>
       <div class="notes__projects">
-        <router-link to="/notes" class="single">
+        <router-link 
+          v-for="folder in folders" 
+          :key="folder.id" 
+          :to="{ name: 'folders', params: { id: folder.id  }}"
+          class="single">
           <i class="icon fa-lg far fa-folder"></i>
-          <h4>All Notes</h4>
+          <h4>{{folder.name}}</h4>
           <h5 class="num">2</h5>
         </router-link>
       </div>
@@ -28,7 +32,18 @@
 
 <script>
 export default {
+  data(){
+    return{
+      folders : []
+    }
+  },
+  mounted(){
+    axios.get('api/folders',{
 
+    }).then((res) =>{
+      this.folders = res.data;
+    })
+  }
 }
 </script>
 

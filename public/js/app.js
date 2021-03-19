@@ -2699,7 +2699,24 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({});
+//
+//
+//
+//
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  data: function data() {
+    return {
+      folders: []
+    };
+  },
+  mounted: function mounted() {
+    var _this = this;
+
+    axios.get('api/folders', {}).then(function (res) {
+      _this.folders = res.data;
+    });
+  }
+});
 
 /***/ }),
 
@@ -2744,13 +2761,22 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  data: function data() {
+    return {
+      notes: []
+    };
+  },
+  mounted: function mounted() {
+    var _this = this;
+
+    console.log(this.id);
+    axios.get('../api/folders/', {}).then(function (res) {
+      console.log(res);
+      _this.notes = res.data;
+    });
+  }
+});
 
 /***/ }),
 
@@ -2967,8 +2993,10 @@ var routes = [{
     requiresAuth: true
   }
 }, {
-  path: '/notes',
+  path: '/folders/:id',
+  name: 'folders',
   component: _pages_notes_Index_vue__WEBPACK_IMPORTED_MODULE_6__.default,
+  props: true,
   meta: {
     requiresAuth: true
   }
@@ -59135,19 +59163,23 @@ var render = function() {
       _c(
         "div",
         { staticClass: "notes__projects" },
-        [
-          _c(
+        _vm._l(_vm.folders, function(folder) {
+          return _c(
             "router-link",
-            { staticClass: "single", attrs: { to: "/notes" } },
+            {
+              key: folder.id,
+              staticClass: "single",
+              attrs: { to: { name: "folders", params: { id: folder.id } } }
+            },
             [
               _c("i", { staticClass: "icon fa-lg far fa-folder" }),
               _vm._v(" "),
-              _c("h4", [_vm._v("All Notes")]),
+              _c("h4", [_vm._v(_vm._s(folder.name))]),
               _vm._v(" "),
               _c("h5", { staticClass: "num" }, [_vm._v("2")])
             ]
           )
-        ],
+        }),
         1
       )
     ]),
@@ -59273,42 +59305,25 @@ var render = function() {
         _c(
           "div",
           { staticClass: "single" },
-          [
-            _c(
+          _vm._l(_vm.notes, function(note) {
+            return _c(
               "router-link",
-              { staticClass: "flex flex-col", attrs: { to: "note/1" } },
+              {
+                key: note.id,
+                staticClass: "flex flex-col",
+                attrs: { to: "note/1" }
+              },
               [
-                _c("h4", [_c("strong", [_vm._v("Note 1....")])]),
+                _c("h4", [
+                  _c("strong", [
+                    _vm._v("Note 1.... " + _vm._s(note.created_at))
+                  ])
+                ]),
                 _vm._v(" "),
-                _c("h5", [
-                  _vm._v(
-                    "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ipsam, consequatur."
-                  )
-                ])
+                _c("h5", [_vm._v(_vm._s(note.note))])
               ]
             )
-          ],
-          1
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          { staticClass: "single" },
-          [
-            _c(
-              "router-link",
-              { staticClass: "flex flex-col", attrs: { to: "note/1" } },
-              [
-                _c("h4", [_c("strong", [_vm._v("Note 2....")])]),
-                _vm._v(" "),
-                _c("h5", [
-                  _vm._v(
-                    "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ipsam, consequatur."
-                  )
-                ])
-              ]
-            )
-          ],
+          }),
           1
         )
       ])

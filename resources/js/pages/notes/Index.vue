@@ -13,15 +13,9 @@
       </div>
       <div class="mt-4 notes__projects">
         <div class="single">
-          <router-link to='note/1' class="flex flex-col">
-            <h4><strong>Note 1....</strong></h4>
-            <h5>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ipsam, consequatur.</h5>
-          </router-link>
-        </div>
-         <div class="single">
-          <router-link to="note/1" class="flex flex-col">
-            <h4><strong>Note 2....</strong></h4>
-            <h5>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ipsam, consequatur.</h5>
+          <router-link v-for="note in notes" :key="note.id" to='note/1' class="flex flex-col">
+            <h4><strong>Note 1.... {{note.created_at}}</strong></h4>
+            <h5>{{note.note}}</h5>
           </router-link>
         </div>
       </div>
@@ -37,6 +31,20 @@
 <script>
 export default {
 
+  data(){
+    return{
+      notes : []
+    }
+  },
+  mounted(){
+    console.log(this.id);
+    axios.get('../api/folders/',{
+     
+    }).then((res) =>{
+      console.log(res);
+      this.notes = res.data;
+    })
+  }
 }
 </script>
 

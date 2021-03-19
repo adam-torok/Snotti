@@ -1,7 +1,6 @@
 import Home from './pages/common/Home.vue'
 import About from './pages/common/About.vue'
 import Details from './pages/common/Details.vue'
-
 import Login from './pages/auth/Login.vue'
 import Register from './pages/auth/Register.vue'
 import Folders from './pages/notes/Folders.vue'
@@ -11,54 +10,67 @@ import EditNote from './pages/notes/edit.vue'
 import CreateNote from './pages/notes/Create.vue'
 
 export const routes = [
-   {path : '/', component : Home ,
+   {  path : '/',
+      component : Home ,
       meta : {
          requiresAuth : false,
       }
    },
-   {path : '/about', component : About,
+   {  path : '/about', 
+      component : About,
       meta : {
          requiresAuth : false,
       }
    },
-   {path : '/details', component : Details,
+   {  path : '/details', 
+      component : Details,
       meta : {
          requiresAuth : false,
       }
    },
-   {path : '/login', component : Login,
-    meta : {
+   {  path : '/login', 
+      component : Login,
+      meta : {
          requiresAuth : false,
       }
    },
-   {path : '/register', component : Register,
-    meta : {
+   {  path : '/register', 
+      component : Register,
+      meta : {
          requiresAuth : false,
       }
    },
-   {path : '/folders', component : Folders,
-    meta : {
-      requiresAuth : true,
-   }},
-   {path : '/notes', component : Notes,
-    meta : {
+   {  path : '/folders', 
+      component : Folders,
+      meta : {
          requiresAuth : true,
       }
    },
-   {path : '/note/create', component : CreateNote,
-    meta : {
+   {  path : '/folders/:id',
+      name: 'folders',
+      component : Notes,
+      props: true,
+      meta : {
+         requiresAuth : true,
+      }},
+ 
+   {  path : '/note/create',
+      component : CreateNote,
+      meta : {
          requiresAuth : true,
       }
    },
-   {path : '/note/:id', component : Note,
-   props: true,
-    meta : {
+   {  path : '/note/:id',
+      component : Note,
+      props: true,
+      meta : {
          requiresAuth : true,
       }
    },
-   {path : '/note/:id/edit', component : EditNote,
-    meta : {
+   {  path : '/note/:id/edit',
+      component : EditNote,
+      meta : {
          requiresAuth : false,
-      }
+         }
    },
 ]
