@@ -11,20 +11,23 @@
         <h1>Folders</h1>
       </div>
       <div v-if="folders.length > 0" class="notes__projects">
-        <router-link 
-          v-for="folder in folders" 
-          :key="folder.id" 
-          :to="{ name: 'folders', params: { id: folder.id  }}"
-          class="single">
-          <i class="icon fa-lg far fa-folder"></i>
-          <h4>{{folder.name}}</h4>
-          <h5 @click.prevent="deleteFolder(folder.id)" class="num"><i class="fas fa-minus-circle"></i></h5>
-        </router-link>
+        <div class="single" v-for="folder in folders" :key="folder.id" >
+          <router-link
+            class="flex gap-5 items-center"
+            v-if="folders"  
+            :to="{ name: 'folders', params: { id: folder.id }}">
+            <i class="icon fa-lg far fa-folder"></i>
+            <h4><strong>{{folder.name}}</strong></h4>
+          </router-link>
+          <button v-if="folder.id !== undefined" @click="deleteFolder(folder.id)" :title="folder.id" class="num">
+            <i class="fas text-2xl fa-minus-circle"></i>
+          </button>
+        </div>
       </div>
       <div v-else class="flex m-auto justify-center items-center flex-col">
-          <h4 class="text-center">It looks empty...</h4>
+        <h4 class="text-center"><b>It looks empty...</b></h4>
       </div>
-      <router-link to="/folder/create">
+      <router-link class="mt-4 flex m-auto justify-center items-center flex-col" to="/folder/create">
         <i class="text-center icon text-6xl fas fa-folder-plus"></i>
       </router-link>
     </div>
@@ -45,13 +48,21 @@ export default {
   },
   methods:{
     deleteFolder(id){
-      alert('deleting ' + id + ' folder');
-      console.log('deleting this folder');
-      // api call
-      // do it in store
+      axios.delete('api/folders/'+id,{
+        headers: { 
+        Authorization: 'Bearer ' + this.$store.state.user.currentUser.token,
+        'X-CSRF-TOKEN' : document.querySelector('meta[name="csrf-token"]').getAttribute('content')},
+        data: {
+          _method:"DELETE",
+          id: id
+        }
+      }).then(() =>{
+        let i = this.folders.map(item => item.id).indexOf(id);
+        this.folders.splice(i, 1);
+      })
     }
   },
-  mounted(){
+  beforeCreate(){
     axios.get('api/folders',{
       headers: {
         Authorization: 'Bearer ' + this.$store.state.user.currentUser.token //the token is a variable which holds the token
@@ -98,21 +109,19 @@ export default {
       outline: none!important;
     }
 
-    &search>input::placeholder{
-
-    }
-
     &projects{
       background: white;
       border-radius: 10px;
       
-      & .single{
-        display: grid;
-        grid-template-columns: 8% 80% 12%;
-        align-items: center;
-        padding: 8px;
-
+    & .single{
+      display: grid;
+      grid-template-columns: 80% 15%;
+      gap: 15px;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px;
         & .num{
+          outline: none!important;
           color: rgb(167, 167, 167);
           text-align: right;
         }

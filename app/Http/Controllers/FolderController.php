@@ -20,7 +20,7 @@ class FolderController extends Controller
         if($folder = Folder::create(['name' => $request->name,'user_id' => $request->user_id])){
             return response($folder, 200);
         }else{
-            return response('Something went wrong!');
+            return response(400,'Something went wrong!');
         }
     }
 
@@ -28,7 +28,13 @@ class FolderController extends Controller
 
     }
 
-    public function destroy(){
-
+    public function destroy(Request $request){
+        $folder = Folder::find($request->id);
+        
+        if($folder->delete() && $folder->notes()->delete()){
+            return response('Sucesfully deleted!',200);
+        }else{
+            return response('Something went wrong!',400);
+        }
     }
 }

@@ -2681,8 +2681,6 @@ __webpack_require__.r(__webpack_exports__);
         }
       }).then(function (res) {
         _this.$router.push('/folders');
-
-        console.log('hi'); // Show a treat
       });
     }
   }
@@ -2739,6 +2737,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -2747,13 +2748,28 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     deleteFolder: function deleteFolder(id) {
-      alert('deleting ' + id + ' folder');
-      console.log('deleting this folder'); // api call
-      // do it in store
+      var _this = this;
+
+      axios["delete"]('api/folders/' + id, {
+        headers: {
+          Authorization: 'Bearer ' + this.$store.state.user.currentUser.token,
+          'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+        },
+        data: {
+          _method: "DELETE",
+          id: id
+        }
+      }).then(function () {
+        var i = _this.folders.map(function (item) {
+          return item.id;
+        }).indexOf(id);
+
+        _this.folders.splice(i, 1);
+      });
     }
   },
-  mounted: function mounted() {
-    var _this = this;
+  beforeCreate: function beforeCreate() {
+    var _this2 = this;
 
     axios.get('api/folders', {
       headers: {
@@ -2761,7 +2777,7 @@ __webpack_require__.r(__webpack_exports__);
 
       }
     }).then(function (res) {
-      _this.folders = res.data; // Add it to the store
+      _this2.folders = res.data; // Add it to the store
     });
   }
 });
@@ -2813,6 +2829,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -2822,7 +2840,6 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     var _this = this;
 
-    console.log(this.$route.params.id);
     axios.get('../api/folders/' + this.$route.params.id, {
       headers: {
         Authorization: 'Bearer ' + this.$store.state.user.currentUser.token //the token is a variable which holds the token
@@ -3268,7 +3285,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".notes {\n  margin: 0px 300px;\n}\n.notes__header {\n  color: #111827;\n  font-weight: 700;\n  font-size: 1.5em;\n  margin-top: 2em;\n  margin-bottom: 0.5em;\n  line-height: 1.3333333;\n}\n.notes__header-sub {\n  color: #111827;\n  font-weight: 700;\n  font-size: 1.2em;\n  margin-top: 1em;\n  margin-bottom: 0.5em;\n  line-height: 1.3333333;\n  margin-left: 0.5em;\n}\n.notes__search > input {\n  width: 100%;\n  padding: 5px;\n  background: white;\n  border-radius: 10px;\n  outline: none !important;\n}\n.notes__projects {\n  background: white;\n  border-radius: 10px;\n}\n.notes__projects .single {\n  display: grid;\n  grid-template-columns: 8% 80% 12%;\n  align-items: center;\n  padding: 8px;\n}\n.notes__projects .single .num {\n  color: #a7a7a7;\n  text-align: right;\n}\n.notes__projects .single:not(:last-child) {\n  border-bottom: 1px solid #e5e5e5;\n}\n.notes__footer {\n  border-top: 1px solid #cacaca;\n  height: 45px;\n  position: absolute;\n  padding: 0px 15px;\n  justify-content: space-between;\n  align-content: center;\n  display: flex;\n  background: #F9F8FB;\n  bottom: 0;\n  width: 100%;\n}\n.notes__footer a {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n.icon {\n  color: gray;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".notes {\n  margin: 0px 300px;\n}\n.notes__header {\n  color: #111827;\n  font-weight: 700;\n  font-size: 1.5em;\n  margin-top: 2em;\n  margin-bottom: 0.5em;\n  line-height: 1.3333333;\n}\n.notes__header-sub {\n  color: #111827;\n  font-weight: 700;\n  font-size: 1.2em;\n  margin-top: 1em;\n  margin-bottom: 0.5em;\n  line-height: 1.3333333;\n  margin-left: 0.5em;\n}\n.notes__search > input {\n  width: 100%;\n  padding: 5px;\n  background: white;\n  border-radius: 10px;\n  outline: none !important;\n}\n.notes__projects {\n  background: white;\n  border-radius: 10px;\n}\n.notes__projects .single {\n  display: grid;\n  grid-template-columns: 80% 15%;\n  gap: 15px;\n  justify-content: space-between;\n  align-items: center;\n  padding: 8px;\n}\n.notes__projects .single .num {\n  outline: none !important;\n  color: #a7a7a7;\n  text-align: right;\n}\n.notes__projects .single:not(:last-child) {\n  border-bottom: 1px solid #e5e5e5;\n}\n.notes__footer {\n  border-top: 1px solid #cacaca;\n  height: 45px;\n  position: absolute;\n  padding: 0px 15px;\n  justify-content: space-between;\n  align-content: center;\n  display: flex;\n  background: #F9F8FB;\n  bottom: 0;\n  width: 100%;\n}\n.notes__footer a {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n.icon {\n  color: gray;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -59282,54 +59299,76 @@ var render = function() {
               { staticClass: "notes__projects" },
               _vm._l(_vm.folders, function(folder) {
                 return _c(
-                  "router-link",
-                  {
-                    key: folder.id,
-                    staticClass: "single",
-                    attrs: {
-                      to: { name: "folders", params: { id: folder.id } }
-                    }
-                  },
+                  "div",
+                  { key: folder.id, staticClass: "single" },
                   [
-                    _c("i", { staticClass: "icon fa-lg far fa-folder" }),
+                    _vm.folders
+                      ? _c(
+                          "router-link",
+                          {
+                            staticClass: "flex gap-5 items-center",
+                            attrs: {
+                              to: { name: "folders", params: { id: folder.id } }
+                            }
+                          },
+                          [
+                            _c("i", {
+                              staticClass: "icon fa-lg far fa-folder"
+                            }),
+                            _vm._v(" "),
+                            _c("h4", [
+                              _c("strong", [_vm._v(_vm._s(folder.name))])
+                            ])
+                          ]
+                        )
+                      : _vm._e(),
                     _vm._v(" "),
-                    _c("h4", [_vm._v(_vm._s(folder.name))]),
-                    _vm._v(" "),
-                    _c(
-                      "h5",
-                      {
-                        staticClass: "num",
-                        on: {
-                          click: function($event) {
-                            $event.preventDefault()
-                            return _vm.deleteFolder(folder.id)
-                          }
-                        }
-                      },
-                      [_c("i", { staticClass: "fas fa-minus-circle" })]
-                    )
-                  ]
+                    folder.id !== undefined
+                      ? _c(
+                          "button",
+                          {
+                            staticClass: "num",
+                            attrs: { title: folder.id },
+                            on: {
+                              click: function($event) {
+                                return _vm.deleteFolder(folder.id)
+                              }
+                            }
+                          },
+                          [
+                            _c("i", {
+                              staticClass: "fas text-2xl fa-minus-circle"
+                            })
+                          ]
+                        )
+                      : _vm._e()
+                  ],
+                  1
                 )
               }),
-              1
+              0
             )
           : _c(
               "div",
               {
                 staticClass: "flex m-auto justify-center items-center flex-col"
               },
-              [
-                _c("h4", { staticClass: "text-center" }, [
-                  _vm._v("It looks empty...")
-                ])
-              ]
+              [_vm._m(3)]
             ),
         _vm._v(" "),
-        _c("router-link", { attrs: { to: "/folder/create" } }, [
-          _c("i", {
-            staticClass: "text-center icon text-6xl fas fa-folder-plus"
-          })
-        ])
+        _c(
+          "router-link",
+          {
+            staticClass:
+              "mt-4 flex m-auto justify-center items-center flex-col",
+            attrs: { to: "/folder/create" }
+          },
+          [
+            _c("i", {
+              staticClass: "text-center icon text-6xl fas fa-folder-plus"
+            })
+          ]
+        )
       ],
       1
     ),
@@ -59398,6 +59437,14 @@ var staticRenderFns = [
     return _c("div", { staticClass: "notes__header-sub" }, [
       _c("h1", [_vm._v("Folders")])
     ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("h4", { staticClass: "text-center" }, [
+      _c("b", [_vm._v("It looks empty...")])
+    ])
   }
 ]
 render._withStripped = true
@@ -59456,25 +59503,49 @@ var render = function() {
         { staticClass: "mt-4 notes__projects" },
         _vm._l(_vm.notes, function(note) {
           return _c(
-            "router-link",
-            {
-              key: note.id,
-              attrs: { to: { name: "note", params: { id: _vm.notes.id } } }
-            },
+            "div",
+            { key: note.id },
             [
-              _c("div", { staticClass: "single flex flex-col" }, [
-                _c("h4", [
-                  _c("strong", [
-                    _vm._v(_vm._s(note.title.substring(0, 15) + "..."))
+              _c(
+                "router-link",
+                {
+                  attrs: { to: { name: "note", params: { id: _vm.notes.id } } }
+                },
+                [
+                  _c("div", { staticClass: "single flex flex-col" }, [
+                    _c("h4", [
+                      _c("strong", [
+                        _vm._v(_vm._s(note.title.substring(0, 15) + "..."))
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("h5", [
+                      _vm._v(_vm._s(note.note.substring(0, 15) + "..."))
+                    ])
                   ])
-                ]),
-                _vm._v(" "),
-                _c("h5", [_vm._v(_vm._s(note.note.substring(0, 15) + "..."))])
-              ])
-            ]
+                ]
+              ),
+              _vm._v(" "),
+              _vm.notes.id !== undefined
+                ? _c(
+                    "button",
+                    {
+                      staticClass: "num",
+                      attrs: { title: _vm.notes.id },
+                      on: {
+                        click: function($event) {
+                          return _vm.deleteFolder(_vm.notes.id)
+                        }
+                      }
+                    },
+                    [_c("i", { staticClass: "fas text-2xl fa-minus-circle" })]
+                  )
+                : _vm._e()
+            ],
+            1
           )
         }),
-        1
+        0
       )
     ]),
     _vm._v(" "),

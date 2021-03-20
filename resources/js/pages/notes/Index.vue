@@ -12,16 +12,18 @@
         <input placeholder="Search" type="text" name="search" id="search">
       </div>
       <div class="mt-4 notes__projects">
-          <router-link 
-          v-for="note in notes" 
-          :key="note.id" 
-          :to="{ name: 'note', params: { id: notes.id  }}" 
-          >
+
+        <div v-for="note in notes" :key="note.id" >
+          <router-link :to="{ name: 'note', params: { id: notes.id  }}">
             <div class="single flex flex-col">
               <h4><strong>{{note.title.substring(0,15)+"..." }}</strong></h4>
               <h5>{{note.note.substring(0,15)+"..." }}</h5>
             </div>
-        </router-link>
+          </router-link>
+        <button v-if="notes.id !== undefined" @click="deleteFolder(notes.id)" :title="notes.id" class="num">
+          <i class="fas text-2xl fa-minus-circle"></i>
+        </button>
+        </div>
       </div>
     </div>
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" class="fill-current bg-gray-200 text-white  md:block"><path fill-opacity="1" d="M0,64L120,85.3C240,107,480,149,720,149.3C960,149,1200,107,1320,85.3L1440,64L1440,320L1320,320C1200,320,960,320,720,320C480,320,240,320,120,320L0,320Z"></path></svg>
@@ -41,7 +43,6 @@ export default {
     }
   },
   mounted(){
-    console.log(this.$route.params.id);
     axios.get('../api/folders/'+this.$route.params.id,{
       headers: {
         Authorization: 'Bearer ' + this.$store.state.user.currentUser.token //the token is a variable which holds the token

@@ -34,7 +34,6 @@ export default {
       }
      ).then((res) => {
         this.$router.push('/folders');
-        console.log('hi'); // Show a treat
       })
     }
   }
