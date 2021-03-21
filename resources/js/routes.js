@@ -3,12 +3,15 @@ import About from './pages/common/About.vue'
 import Details from './pages/common/Details.vue'
 import Login from './pages/auth/Login.vue'
 import Register from './pages/auth/Register.vue'
-import Folders from './pages/notes/Folders.vue'
-import CreateFolder from './pages/notes/Create.vue'
+
+import Folders from './pages/folders/Folders.vue'
+import CreateFolder from './pages/folders/Create.vue'
+
 import Notes from './pages/notes/Index.vue'
-import Note from './pages/notes/show.vue'
-import EditNote from './pages/notes/edit.vue'
+import Note from './pages/notes/Show.vue'
+
 import CreateNote from './pages/notes/Create.vue'
+
 
 export const routes = [{
         path: '/',
@@ -62,7 +65,7 @@ export const routes = [{
     },
 
     {
-        path: '/folders/:id',
+        path: '/folders/:folderId',
         name: 'folders',
         component: Notes,
         props: true,
@@ -70,9 +73,10 @@ export const routes = [{
             requiresAuth: true,
         }
     },
+
     {
-        path: '/note/:id',
-        name: 'note',
+        path: '/folders/:folderId/note/:noteId',
+        name: 'showNote',
         component: Note,
         props: true,
         meta: {
@@ -81,18 +85,13 @@ export const routes = [{
     },
 
     {
-        path: '/note/create',
+        path: '/folders/:folderId/note/create',
+        name: 'createNote',
         component: CreateNote,
+        props: true,
         meta: {
             requiresAuth: true,
         }
     },
 
-    {
-        path: '/note/:id/edit',
-        component: EditNote,
-        meta: {
-            requiresAuth: false,
-        }
-    },
 ]

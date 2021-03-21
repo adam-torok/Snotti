@@ -12,10 +12,6 @@ class FolderController extends Controller
         
     }
 
-    public function show(Request $id){
-        
-    }
-
     public function store(Request $request){
         if($folder = Folder::create(['name' => $request->name,'user_id' => $request->user_id])){
             return response($folder, 200);
@@ -30,8 +26,12 @@ class FolderController extends Controller
 
     public function destroy(Request $request){
         $folder = Folder::find($request->id);
-        
-        if($folder->delete() && $folder->notes()->delete()){
+
+        if($folder->delete()){
+            if($folder->notes()){
+                $folder->notes()->delete();
+                return response('Sucesfully deleted!',200);
+            }
             return response('Sucesfully deleted!',200);
         }else{
             return response('Something went wrong!',400);

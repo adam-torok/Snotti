@@ -12,9 +12,13 @@ Route::get('folders', [UserController::class, 'getAllFolders']);
 Route::post('folders/create', [FolderController::class, 'store']);
 Route::delete('folders/{id}/', [FolderController::class, 'destroy']);
 
+
+Route::get('note/{id}', [NoteController::class, 'show']);
+Route::delete('note/{id}/', [NoteController::class, 'destroy']);
+Route::post('note/create', [NoteController::class, 'store']);
+Route::post('note/update', [NoteController::class, 'update']);
 Route::get('notes', [UserController::class, 'getAllNotes']);
 
-Route::get('folder/{id}/notes/{note_id}', [NoteController::class, 'showNoteById']);
 
 Route::group(['prefix' => 'auth'], function () {
     Route::post('registrate', [AuthController::class, 'registrate']);

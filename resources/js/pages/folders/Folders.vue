@@ -15,7 +15,7 @@
           <router-link
             class="flex gap-5 items-center"
             v-if="folders"  
-            :to="{ name: 'folders', params: { id: folder.id }}">
+            :to="{ name: 'folders', params: { folderId: folder.id }}">
             <i class="icon fa-lg far fa-folder"></i>
             <h4><strong>{{folder.name}}</strong></h4>
           </router-link>
@@ -33,8 +33,8 @@
     </div>
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" class="fill-current bg-gray-200 text-white  md:block"><path fill-opacity="1" d="M0,64L120,85.3C240,107,480,149,720,149.3C960,149,1200,107,1320,85.3L1440,64L1440,320L1320,320C1200,320,960,320,720,320C480,320,240,320,120,320L0,320Z"></path></svg>
     <div class="notes__footer">
-      <router-link to="/folder/create"><i class="icon fa-lg fas fa-folder-plus"></i></router-link>
-      <router-link to="/note/create"><i class="icon fa-lg far fa-edit"></i></router-link>
+      <router-link to="/folders/create"><i class="icon fa-lg fas fa-folder-plus"></i></router-link>
+      <router-link to="folders/note/create"><i class="icon fa-lg far fa-edit"></i></router-link>
     </div>
   </div>
 </template>
@@ -50,13 +50,15 @@ export default {
     deleteFolder(id){
       axios.delete('api/folders/'+id,{
         headers: { 
-        Authorization: 'Bearer ' + this.$store.state.user.currentUser.token,
-        'X-CSRF-TOKEN' : document.querySelector('meta[name="csrf-token"]').getAttribute('content')},
+          Authorization: 'Bearer ' + this.$store.state.user.currentUser.token,
+          'X-CSRF-TOKEN' : document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+        },
         data: {
-          _method:"DELETE",
+          _method: "DELETE",
           id: id
         }
-      }).then(() =>{
+      })
+      .then(() =>{
         let i = this.folders.map(item => item.id).indexOf(id);
         this.folders.splice(i, 1);
       })
