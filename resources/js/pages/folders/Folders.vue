@@ -1,5 +1,6 @@
 <template>
   <div class="flex flex-col bg-gray-200">
+    <Loader v-if="loading"/>
     <div class="notes">
       <div class="notes__header">
         <h1>Folders</h1>
@@ -11,24 +12,28 @@
         <h1>Folders</h1>
       </div>
       <div v-if="folders.length > 0" class="notes__projects">
-        <div class="single" v-for="folder in folders" :key="folder.id" >
-          <router-link
-            class="flex gap-5 items-center"
-            v-if="folders"  
-            :to="{ name: 'folders', params: { folderId: folder.id }}">
-            <i class="icon fa-lg far fa-folder"></i>
-            <h4><strong>{{folder.name}}</strong></h4>
-          </router-link>
-          <button v-if="folder.id !== undefined" @click="deleteFolder(folder.id)" :title="folder.id" class="num">
-            <i class="fas text-2xl fa-minus-circle"></i>
-          </button>
-        </div>
+        <transition-group name="list" tag="div">
+          <div class="single" v-for="folder in folders" :key="folder.id" >
+            <router-link
+              class="flex gap-5 items-center"
+              v-if="folders"  
+              :to="{ name: 'folders', params: { folderId: folder.id }}">
+              <i class="icon fa-lg far fa-folder"></i>
+              <h4 class="text-gray-600"><strong>{{folder.name}}</strong></h4>
+            </router-link>
+            <button v-if="folder.id !== undefined" @click="deleteFolder(folder.id)" :title="folder.id" class="num">
+              <i class="fas text-2xl fa-minus-circle"></i>
+            </button>
+          </div>
+        </transition-group>
       </div>
+      
       <div v-else class="flex m-auto justify-center items-center flex-col">
         <h4 class="text-center"><b>It looks empty...</b></h4>
       </div>
-      <router-link class="mt-4 flex m-auto justify-center items-center flex-col" to="/folder/create">
-        <i class="text-center icon text-6xl fas fa-folder-plus"></i>
+      
+      <router-link class="flex m-auto justify-center items-center flex-col mt-6" to="/folder/create">
+        <h2>Create new note!</h2>
       </router-link>
     </div>
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" class="fill-current bg-gray-200 text-white  md:block"><path fill-opacity="1" d="M0,64L120,85.3C240,107,480,149,720,149.3C960,149,1200,107,1320,85.3L1440,64L1440,320L1320,320C1200,320,960,320,720,320C480,320,240,320,120,320L0,320Z"></path></svg>
@@ -40,10 +45,15 @@
 </template>
 
 <script>
+import Loader from '../../components/Loader'
 export default {
+  components:{
+    Loader
+  },  
   data(){
     return{
-      folders : []
+      folders : [],
+      loading : true,
     }
   },
   methods:{
@@ -71,12 +81,21 @@ export default {
       }
     }).then((res) =>{
       this.folders = res.data; // Add it to the store
+      this.loading = false;
     })
   }
 }
 </script>
 
 <style lang="scss">
+
+.list-enter-active, .list-leave-active {
+  transition: all 0.3s;
+}
+.list-enter, .list-leave-to /* .list-leave-active below version 2.1.8 */ {
+  opacity: 0;
+  transform: translateY(10px);
+}
 
   .notes{
     margin: 0px 300px;

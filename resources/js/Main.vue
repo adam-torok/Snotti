@@ -37,7 +37,7 @@ export default {
     opacity: 0;
   }
   
-  @media only screen and (max-width: 600px) {
+  @media only screen and (max-width: 900px) {
     .notes{
       margin: 0 20px!important;
     }
