@@ -30,7 +30,6 @@ class UserController extends Controller
     }
 
     public function getNotesByFolderId(Request $request){
-
         $user = $this->getAuthenticatedUser();
         $currentUser = User::find($user->id);
         $notes = $currentUser->notes()->where('folder_id', '=', $request->id)->get();

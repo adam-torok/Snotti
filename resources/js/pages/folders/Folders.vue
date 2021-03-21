@@ -11,25 +11,30 @@
         <h1>Folders</h1>
       </div>
       <div v-if="folders.length > 0" class="notes__projects">
-        <router-link 
-          v-for="folder in folders" 
-          :key="folder.id" 
-          :to="{ name: 'folders', params: { id: folder.id  }}"
-          class="single">
-          <i class="icon fa-lg far fa-folder"></i>
-          <h4>{{folder.name}}</h4>
-          <h5 class="num">2</h5>
-        </router-link>
-      </div>
-      <div class="flex m-auto justify-center items-center flex-col" v-else>
-          <h4 class="text-center">It looks empty...</h4>
-          <a href="#"><i class="text-center icon text-6xl fas fa-folder-plus"></i></a>
+        <div class="single" v-for="folder in folders" :key="folder.id" >
+          <router-link
+            class="flex gap-5 items-center"
+            v-if="folders"  
+            :to="{ name: 'folders', params: { folderId: folder.id }}">
+            <i class="icon fa-lg far fa-folder"></i>
+            <h4><strong>{{folder.name}}</strong></h4>
+          </router-link>
+          <button v-if="folder.id !== undefined" @click="deleteFolder(folder.id)" :title="folder.id" class="num">
+            <i class="fas text-2xl fa-minus-circle"></i>
+          </button>
         </div>
+      </div>
+      <div v-else class="flex m-auto justify-center items-center flex-col">
+        <h4 class="text-center"><b>It looks empty...</b></h4>
+      </div>
+      <router-link class="mt-4 flex m-auto justify-center items-center flex-col" to="/folder/create">
+        <i class="text-center icon text-6xl fas fa-folder-plus"></i>
+      </router-link>
     </div>
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" class="fill-current bg-gray-200 text-white  md:block"><path fill-opacity="1" d="M0,64L120,85.3C240,107,480,149,720,149.3C960,149,1200,107,1320,85.3L1440,64L1440,320L1320,320C1200,320,960,320,720,320C480,320,240,320,120,320L0,320Z"></path></svg>
     <div class="notes__footer">
-      <router-link to="/note/create"><i class="icon fa-lg fas fa-folder-plus"></i></router-link>
-      <router-link to="/note/create"><i class="icon fa-lg far fa-edit"></i></router-link>
+      <router-link to="/folders/create"><i class="icon fa-lg fas fa-folder-plus"></i></router-link>
+      <router-link to="folders/note/create"><i class="icon fa-lg far fa-edit"></i></router-link>
     </div>
   </div>
 </template>
@@ -41,13 +46,31 @@ export default {
       folders : []
     }
   },
-  mounted(){
+  methods:{
+    deleteFolder(id){
+      axios.delete('api/folders/'+id,{
+        headers: { 
+          Authorization: 'Bearer ' + this.$store.state.user.currentUser.token,
+          'X-CSRF-TOKEN' : document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+        },
+        data: {
+          _method: "DELETE",
+          id: id
+        }
+      })
+      .then(() =>{
+        let i = this.folders.map(item => item.id).indexOf(id);
+        this.folders.splice(i, 1);
+      })
+    }
+  },
+  beforeCreate(){
     axios.get('api/folders',{
       headers: {
         Authorization: 'Bearer ' + this.$store.state.user.currentUser.token //the token is a variable which holds the token
       }
     }).then((res) =>{
-      this.folders = res.data;
+      this.folders = res.data; // Add it to the store
     })
   }
 }
@@ -88,21 +111,19 @@ export default {
       outline: none!important;
     }
 
-    &search>input::placeholder{
-
-    }
-
     &projects{
       background: white;
       border-radius: 10px;
       
-      & .single{
-        display: grid;
-        grid-template-columns: 8% 80% 12%;
-        align-items: center;
-        padding: 8px;
-
+    & .single{
+      display: grid;
+      grid-template-columns: 80% 15%;
+      gap: 15px;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px;
         & .num{
+          outline: none!important;
           color: rgb(167, 167, 167);
           text-align: right;
         }

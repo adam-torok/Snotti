@@ -12,37 +12,58 @@
         <input placeholder="Search" type="text" name="search" id="search">
       </div>
       <div class="mt-4 notes__projects">
-          <router-link 
-          v-for="note in notes" 
-          :key="note.id" 
-          :to="{ name: 'note', params: { id: notes.id  }}" 
-          >
+
+        <div class="grid note__container" v-for="note in notes" :key="note.id" >
+          <router-link :to="{ name: 'showNote', params: { folderId: $route.params.folderId, noteId: note.id  }}">
             <div class="single flex flex-col">
               <h4><strong>{{note.title.substring(0,15)+"..." }}</strong></h4>
               <h5>{{note.note.substring(0,15)+"..." }}</h5>
             </div>
-        </router-link>
+          </router-link>
+        <button v-if="note.id !== undefined" @click="deleteNote(note.id)" :title="note.id" class="num">
+          <i class="fas text-2xl fa-minus-circle"></i>
+        </button>
+        
+        </div>
       </div>
     </div>
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" class="fill-current bg-gray-200 text-white  md:block"><path fill-opacity="1" d="M0,64L120,85.3C240,107,480,149,720,149.3C960,149,1200,107,1320,85.3L1440,64L1440,320L1320,320C1200,320,960,320,720,320C480,320,240,320,120,320L0,320Z"></path></svg>
     <div class="notes__footer">
-      <span><small>2 Notes</small></span>
-      <router-link to="/note/create"><i class="icon fa-lg far fa-edit"></i></router-link>
+      <span><small>{{notes.length}} Notes</small></span>
+      <router-link  
+      :to="{ name: 'createNote', params: { folderId: this.$route.params.folderId  }}">
+        <i class="icon fa-lg far fa-edit"></i>
+      </router-link>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-
   data(){
     return{
-      notes : []
+      notes : [],
+    }
+  },
+  methods:{
+    deleteNote(id){
+      axios.delete('../api/note/'+id,{
+        header:{
+          Authorization : 'Bearer' + this.$store.state.user.currentUser.token,
+          'X-CSRF-TOKEN' : document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+        },
+        data:{
+          id: id,
+          _method: 'DELETE'
+        }
+      }).then(() =>{
+        let i = this.notes.map(item => item.id).indexOf(id);
+        this.notes.splice(i, 1);
+      })
     }
   },
   mounted(){
-    console.log(this.$route.params.id);
-    axios.get('../api/folders/'+this.$route.params.id,{
+    axios.get('../api/folders/'+this.$route.params.folderId,{
       headers: {
         Authorization: 'Bearer ' + this.$store.state.user.currentUser.token //the token is a variable which holds the token
       }
@@ -54,6 +75,15 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
+  .note__container{
+    padding: 10px;
+    grid-template-columns: 95% 5%;
+  }
+
+  .num{
+    outline: none!important;
+  }
 
   .notes__{
     &header-sub{

@@ -9,18 +9,19 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('folders/{id}/', [UserController::class, 'getNotesByFolderId']);
 Route::get('folders', [UserController::class, 'getAllFolders']);
-
-
-Route::post('registrate', [AuthController::class, 'registrate']);
-Route::post('folders', [FolderController::class, 'store']);
+Route::post('folders/create', [FolderController::class, 'store']);
 Route::delete('folders/{id}/', [FolderController::class, 'destroy']);
-Route::post('notes', [NoteController::class, 'store']);
-Route::get('notes', [UserController::class, 'getAllNotes']);
-Route::delete('notes/{id}/', [NoteController::class, 'destroy']);
 
-Route::get('folder/{id}/notes/{note_id}', [NoteController::class, 'showNoteById']);
+
+Route::get('note/{id}', [NoteController::class, 'show']);
+Route::delete('note/{id}/', [NoteController::class, 'destroy']);
+Route::post('note/create', [NoteController::class, 'store']);
+Route::post('note/update', [NoteController::class, 'update']);
+Route::get('notes', [UserController::class, 'getAllNotes']);
+
 
 Route::group(['prefix' => 'auth'], function () {
+    Route::post('registrate', [AuthController::class, 'registrate']);
     Route::post('login', [AuthController::class, 'login']);
     Route::post('logout', [AuthController::class, 'logout']);
 });
