@@ -19,9 +19,9 @@ Route::post('note/create', [NoteController::class, 'store']);
 Route::post('note/update', [NoteController::class, 'update']);
 Route::get('notes', [UserController::class, 'getAllNotes']);
 
+Route::post('registrate', [AuthController::class, 'registrate']);
 
 Route::group(['prefix' => 'auth'], function () {
-    Route::post('registrate', [AuthController::class, 'registrate']);
     Route::post('login', [AuthController::class, 'login']);
     Route::post('logout', [AuthController::class, 'logout']);
 });

@@ -54,11 +54,12 @@ class AuthController extends Controller
 
     public function registrate()
     {
+
         $this->validate(request(), [
-            'name' => 'required',
-            'email' => 'required|email',
-            'password' => 'required'
-        ]);
+        'name' => 'required',
+        'email' => 'required|email',
+        'password' => 'required'
+        ]); 
         
         if($user = User::create([
             'name' => request('name'),
@@ -66,7 +67,7 @@ class AuthController extends Controller
             'password' => request('password'),
             ])
         ){
-            return response($user, 200);
+            return response('Sucessfull registration!', 200);
         }else{
             return response('Something went wrong!');
         }

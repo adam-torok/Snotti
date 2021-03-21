@@ -161,7 +161,7 @@ export default {
     &footer{
         border-top: 1px solid #cacaca;
         height: 45px;
-        position: absolute;
+        position: fixed;
         padding: 0px 15px;
         justify-content: space-between;
         align-content: center;

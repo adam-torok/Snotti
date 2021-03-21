@@ -23,6 +23,7 @@
                 name="email"
                 type="email"
                 id="email"
+                required
                 autofocus
                 class="px-4 py-2 transition duration-300 border border-gray-300 rounded focus:border-transparent focus:outline-none focus:ring-4 focus:ring-gray-200"
               />
@@ -35,6 +36,7 @@
                 v-model="form.password"
                 type="password"
                 name="password"
+                required
                 id="password"
                 class="px-4 py-2 transition duration-300 border border-gray-300 rounded focus:border-transparent focus:outline-none focus:ring-4 focus:ring-gray-200"
               />
@@ -55,6 +57,9 @@
                 {{loginText}}
                   <i v-show="isLoading" class="fas fa-spinner fa-spin"></i>
               </button>
+
+            <Error v-if="errors.length > 0" :alert="this.errors[0]"/>
+
             </div>
             <div class="flex flex-col space-y-5">
               <span class="flex items-center justify-center space-x-2">
@@ -70,7 +75,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import Error from '../../components/Error'
 export default {
   data(){
     return {
@@ -78,9 +83,13 @@ export default {
       loginText : 'Login',
       form : {
         email : '',
-        password : ''
-      }
+        password : '',
+      },
+      errors : []
     }
+  },
+  components:{
+    Error
   },
      methods: {
 
@@ -95,9 +104,9 @@ export default {
                })
                .catch((error) => {
                   setTimeout(() => {
-                     //this.$store.dispatch('alert/error', error);
                      this.loginText = "Login";
                      this.isLoading = false;
+                     this.errors.push(error);
                   }, 1000);
                });
          }, 2000);
