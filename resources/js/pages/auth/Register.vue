@@ -25,6 +25,7 @@
               <input
                 v-model="form.email"
                 type="email"
+                required
                 name="email"
                 id="email"
                 autofocus
@@ -37,6 +38,7 @@
                 v-model="form.name"
                 type="text"
                 name="name"
+                required
                 id="name"
                 autofocus
                 class="px-4 py-2 transition duration-300 border border-gray-300 rounded focus:border-transparent focus:outline-none focus:ring-4 focus:ring-gray-200"
@@ -49,6 +51,7 @@
               <input
                 v-model="form.password"
                 type="password"
+                required
                 name="password"
                 id="password"
                 class="px-4 py-2 transition duration-300 border border-gray-300 rounded focus:border-transparent focus:outline-none focus:ring-4 focus:ring-gray-200"
@@ -60,6 +63,7 @@
               </div>
               <input
                 type="password"
+                required
                 name="password_again"
                 id="password_again"
                 class="px-4 py-2 transition duration-300 border border-gray-300 rounded focus:border-transparent focus:outline-none focus:ring-4 focus:ring-gray-200"
@@ -72,6 +76,9 @@
               >
                 Register
               </button>
+
+            <Error v-if="errors.length > 0" :alert="this.errors[0]"/>
+              
             </div>
             <div class="flex flex-col space-y-5">
               <span class="flex items-center justify-center space-x-2">
@@ -87,9 +94,14 @@
 </template>
 
 <script>
+import Error from '../../components/Error'
 export default {
+  components:{
+    Error
+  },
   data(){
     return{
+      errors:[],
       form:{
         email : '',
         name : '',
@@ -102,13 +114,10 @@ export default {
       axios.post('/api/registrate', this.form)
           .then(() => {
               this.$router.push({ path: '/login' })
-              setTimeout(() => {
-                  //this.$store.dispatch('alert/success', 'Registration successful');
-              })
           })
-          .catch((err) =>{
+          .catch((error) =>{
               setTimeout(() => {
-                  //this.$store.dispatch('alert/error', err);
+                this.errors.push('We had some problem registrating you!');
             })
         })
     },

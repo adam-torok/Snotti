@@ -60,7 +60,6 @@ export default {
     decodeHTML(html) {
       var txt = document.createElement("textarea");
       txt.innerHTML = html;
-      console.log(txt.value);
       return txt.value;
     },
     deleteNote(id){
@@ -140,7 +139,7 @@ export default {
     &footer{
       border-top: 1px solid #cacaca;
       height: 45px;
-      position: absolute;
+      position: fixed;
       padding: 0px 15px;
       align-content: center;
       justify-content: center;

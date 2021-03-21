@@ -17,6 +17,7 @@
 export default {
   data(){
     return{
+      errors : [],
       form:{
         user_id : this.$store.state.user.currentUser.id,
         name : ''
@@ -34,6 +35,7 @@ export default {
       }
      ).then((res) => {
         this.$router.push('/folders');
+
       })
     }
   }
