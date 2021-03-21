@@ -21,7 +21,10 @@
               <i class="icon fa-lg far fa-folder"></i>
               <h4 class="text-gray-600"><strong>{{folder.name}}</strong></h4>
             </router-link>
-            <button v-if="folder.id !== undefined" @click="deleteFolder(folder.id)" :title="folder.id" class="num">
+            <button 
+                data-tippy-content="Delete this folder" 
+                v-if="folder.id !== undefined"
+                @click="deleteFolder(folder.id)" class="num">
               <i class="fas text-2xl fa-minus-circle"></i>
             </button>
           </div>
@@ -33,13 +36,15 @@
       </div>
       
       <router-link class="flex m-auto justify-center items-center flex-col mt-6" to="/folder/create">
-        <h2>Create new note!</h2>
+        <h2 data-tippy-content="Click here, to create a new note!">Create new note!</h2>
       </router-link>
     </div>
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" class="fill-current bg-gray-200 text-white  md:block"><path fill-opacity="1" d="M0,64L120,85.3C240,107,480,149,720,149.3C960,149,1200,107,1320,85.3L1440,64L1440,320L1320,320C1200,320,960,320,720,320C480,320,240,320,120,320L0,320Z"></path></svg>
     <div class="notes__footer">
-      <router-link to="/folders/create"><i class="icon fa-lg fas fa-folder-plus"></i></router-link>
-      <router-link to="folders/note/create"><i class="icon fa-lg far fa-edit"></i></router-link>
+      <router-link 
+      data-tippy-content="Click here, to create a new Folder!" to="folder/create">
+      <i class="icon fa-lg far fa-edit"></i>
+      </router-link>
     </div>
   </div>
 </template>

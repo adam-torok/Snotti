@@ -2646,6 +2646,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
@@ -2751,6 +2756,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _components_Loader__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../components/Loader */ "./resources/js/components/Loader.vue");
+//
+//
+//
+//
+//
 //
 //
 //
@@ -33870,7 +33880,7 @@ var render = function() {
               {
                 staticClass:
                   "inline-block py-2 text-gray-800 text-2xl font-bold",
-                attrs: { to: "/" }
+                attrs: { "data-tippy-content": "Home", to: "/" }
               },
               [_c("i", { staticClass: "fab fa-apple" }), _vm._v(" Snotti. ")]
             )
@@ -34009,7 +34019,10 @@ var render = function() {
                   {
                     staticClass:
                       "inline-block py-1 md:py-4 text-gray-600 mr-6 font-bold",
-                    attrs: { to: "/folders" }
+                    attrs: {
+                      "data-tippy-content": "These are your folders",
+                      to: "/folders"
+                    }
                   },
                   [_vm._v("Folders")]
                 )
@@ -35380,7 +35393,9 @@ var render = function() {
                                 "button",
                                 {
                                   staticClass: "num",
-                                  attrs: { title: folder.id },
+                                  attrs: {
+                                    "data-tippy-content": "Delete this folder"
+                                  },
                                   on: {
                                     click: function($event) {
                                       return _vm.deleteFolder(folder.id)
@@ -35419,7 +35434,17 @@ var render = function() {
                 "flex m-auto justify-center items-center flex-col mt-6",
               attrs: { to: "/folder/create" }
             },
-            [_c("h2", [_vm._v("Create new note!")])]
+            [
+              _c(
+                "h2",
+                {
+                  attrs: {
+                    "data-tippy-content": "Click here, to create a new note!"
+                  }
+                },
+                [_vm._v("Create new note!")]
+              )
+            ]
           )
         ],
         1
@@ -35449,13 +35474,16 @@ var render = function() {
         "div",
         { staticClass: "notes__footer" },
         [
-          _c("router-link", { attrs: { to: "/folders/create" } }, [
-            _c("i", { staticClass: "icon fa-lg fas fa-folder-plus" })
-          ]),
-          _vm._v(" "),
-          _c("router-link", { attrs: { to: "folders/note/create" } }, [
-            _c("i", { staticClass: "icon fa-lg far fa-edit" })
-          ])
+          _c(
+            "router-link",
+            {
+              attrs: {
+                "data-tippy-content": "Click here, to create a new Folder!",
+                to: "folder/create"
+              }
+            },
+            [_c("i", { staticClass: "icon fa-lg far fa-edit" })]
+          )
         ],
         1
       )
@@ -35582,9 +35610,11 @@ var render = function() {
             ]
           ),
           _vm._v(" "),
-          _c("router-link", { staticClass: "icon", attrs: { to: "/notes" } }, [
-            _c("i", { staticClass: "icon fa-lg fas fa-ellipsis-h" })
-          ])
+          _c(
+            "router-link",
+            { staticClass: "icon", attrs: { to: "/folders" } },
+            [_c("i", { staticClass: "icon fa-lg fas fa-ellipsis-h" })]
+          )
         ],
         1
       ),
@@ -35649,7 +35679,7 @@ var render = function() {
                           "button",
                           {
                             staticClass: "num",
-                            attrs: { title: note.id },
+                            attrs: { "data-tippy-content": "Create new Note!" },
                             on: {
                               click: function($event) {
                                 return _vm.deleteNote(note.id)
@@ -35706,6 +35736,7 @@ var render = function() {
             "router-link",
             {
               attrs: {
+                "data-tippy-content": "Create new Note!",
                 to: {
                   name: "createNote",
                   params: { folderId: this.$route.params.folderId }

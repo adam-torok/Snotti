@@ -29,6 +29,7 @@
     "dependencies": {
         "@ckeditor/ckeditor5-build-classic": "^26.0.0",
         "@ckeditor/ckeditor5-vue2": "^1.0.5",
+        "tippy.js": "^6.3.1",
         "vue-router": "^3.5.1",
         "vuex": "^3.6.2"
     }

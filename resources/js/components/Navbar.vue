@@ -2,7 +2,7 @@
   <div class="bg-gray-200 px-4 py-4">
     <div class="w-full flex items-center content-center justify-between	 md:max-w-6xl md:mx-auto md:flex md:items-center md:justify-between">
       <div class="flex justify-center">
-        <router-link to="/" class="inline-block py-2 text-gray-800 text-2xl font-bold"><i class="fab fa-apple"></i> Snotti. </router-link>
+        <router-link data-tippy-content="Home" to="/" class="inline-block py-2 text-gray-800 text-2xl font-bold"><i class="fab fa-apple"></i> Snotti. </router-link>
       </div>
 
         <div ref="outerDropdownMenu" v-if="!currentUser">
@@ -26,7 +26,7 @@
       </div>
        
       <div v-if="currentUser">
-          <router-link to="/folders" class="inline-block py-1 md:py-4 text-gray-600 mr-6 font-bold">Folders</router-link>
+          <router-link data-tippy-content="These are your folders" to="/folders" class="inline-block py-1 md:py-4 text-gray-600 mr-6 font-bold">Folders</router-link>
       </div>
 
        <div ref="dropdownMenu" v-if="currentUser">

@@ -3,7 +3,7 @@
     <Loader v-if="loading"/>
     <div class="flex justify-between p-4">
       <router-link class="icon flex justify-center items-center" to="/folders"><i class="icon fa-lg fas fa-chevron-left mr-1"></i> Back</router-link>
-      <router-link class="icon" to="/notes"><i class="icon fa-lg fas fa-ellipsis-h"></i></router-link>
+      <router-link class="icon" to="/folders"><i class="icon fa-lg fas fa-ellipsis-h"></i></router-link>
     </div>
     <div class="notes">
       <div class="notes__header">
@@ -21,7 +21,11 @@
                 <i><div class="flex" v-html="note.note.substring(0,15)+'<span>...</span>'"></div></i>
               </div>
             </router-link>
-        <button v-if="note.id !== undefined" @click="deleteNote(note.id)" :title="note.id" class="num">
+        <button 
+          data-tippy-content='Create new Note!'
+          v-if="note.id !== undefined" 
+          @click="deleteNote(note.id)" 
+          class="num">
           <i class="fas text-2xl fa-minus-circle"></i>
         </button>
         </div>
@@ -32,6 +36,7 @@
     <div class="notes__footer">
       <span><small>{{notes.length}} Notes</small></span>
       <router-link  
+      data-tippy-content='Create new Note!'
       :to="{ name: 'createNote', params: { folderId: this.$route.params.folderId  }}">
         <i class="icon fa-lg far fa-edit"></i>
       </router-link>
